@@ -21,4 +21,37 @@ admin.site.register(Nature, AbstractCategoryAdmin)
 admin.site.register(Company, AbstractCategoryAdmin)
 admin.site.register(Country, AbstractCategoryAdmin)
 
-admin.site.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    date_hierarchy = 'creation_date'
+    list_display_links = ('civility', 'first_name', 'last_name')
+    list_display = ('civility', 'first_name', 'last_name',
+                    'email', 'company', 'country', 'get_groups',
+                    'language', 'nature', 'get_categories', 'tags')
+    list_filter = ('civility', 'groups', 'language', 'nature', 'categories',
+                   'country', 'creation_date')
+    search_fields = ('first_name', 'last_name', 'email', 'company', 'city', 'address_1',
+                     'address_2', 'postal_code', 'city', 'address_comments', 'tags',
+                     'comments', 'phone', 'mobile', 'fax', 'function', 'reference', 'slug')
+    filter_horizontal = ['categories', 'groups']
+    fieldsets = ((None, {'fields': ('civility', 'first_name', 'last_name',)}),
+                 (_('Contact'), {'fields': ('email', 'phone', 'mobile', 'fax')}),
+                 (_('Address'), {'fields': ('address_1', 'address_2', 'postal_code', 'city',
+                                            'country', 'address_comments')}),                 
+                 (_('Personnal'), {'fields': ('language', 'birthdate', 'company', 'function',)}),
+                 (_('Classification'), {'fields': ('reference', 'nature',
+                                                   'categories', 'tags', 'groups')}),
+                 (_('Misc.'), {'fields': ('comments', 'slug',)}))
+    actions_on_top = False
+    actions_on_bottom = True
+
+    def get_groups(self, contact):
+        return ', '.join([group.name for section in contact.groups.all()])
+    get_groups.short_description = _('Groups')
+
+    def get_categories(self, contact):
+        return ', '.join([category.name for category in contact.categories.all()])
+    get_categories.short_description = _('Categories')
+
+
+admin.site.register(Profile, ProfileAdmin)
+
