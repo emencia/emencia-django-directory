@@ -24,7 +24,19 @@ class AbstractCategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, AbstractCategoryAdmin)
 admin.site.register(Nature, AbstractCategoryAdmin)
 admin.site.register(Company, AbstractCategoryAdmin)
-admin.site.register(Country, AbstractCategoryAdmin)
+
+class CountryAdmin(admin.ModelAdmin):
+    search_fields = ('printable_name', 'name', 'iso', 'iso3')
+    list_display = ('printable_name', 'name', 'iso', 'iso3', 'numcode','level')
+    ordering = ('printable_name',)
+    fieldsets = ((None, {'fields': ('printable_name', 'name')}),
+                 (_('References'), {'fields': ('iso', 'iso3', 'numcode')}),
+                 (None, {'fields': ('level',)}),)
+    actions_on_top = False
+    actions_on_bottom = True
+
+admin.site.register(Country, CountryAdmin)
+
 
 class ProfileAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
