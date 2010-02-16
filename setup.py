@@ -28,6 +28,7 @@ setup(name='emencia.django.directory',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'tagging',
       ],
       entry_points="""
       # -*- Entry points: -*-
