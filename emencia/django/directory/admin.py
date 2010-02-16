@@ -1,7 +1,12 @@
 """Admin for emencia.django.directory"""
-from django.contrib import admin
-from django.utils.translation import ugettext as _
+from datetime import datetime
 
+from django.contrib import admin
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
+from django.http import HttpResponseRedirect
+
+from emencia.django.directory import settings
 from emencia.django.directory.models import Category
 from emencia.django.directory.models import Nature
 from emencia.django.directory.models import Company
@@ -43,6 +48,13 @@ class ProfileAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('first_name', 'last_name', 'language',)}
     actions_on_top = False
     actions_on_bottom = True
+    actions = ['make_mailinglist',]
+
+    def get_actions(self, request):
+        actions = super(ProfileAdmin, self).get_actions(request)
+        if not settings.EDN_INSTALLED:
+            del actions['make_mailinglist']
+        return actions
 
     def fullname(self, contact):
         return contact.__unicode__()
@@ -55,6 +67,31 @@ class ProfileAdmin(admin.ModelAdmin):
     def get_categories(self, contact):
         return ', '.join([category.name for category in contact.categories.all()])
     get_categories.short_description = _('Categories')
+
+    def make_mailinglist(self, request, queryset):
+        """Create a mailing list from the profile list"""
+        from emencia.django.newsletter.models import Contact
+        from emencia.django.newsletter.models import MailingList
+        subscribers = []
+        for profile in queryset:
+            contact, created = Contact.objects.get_or_create(email=profile.email,
+                                                             defaults={'first_name': profile.first_name,
+                                                                       'last_name': profile.last_name,
+                                                                       'tags': profile.tags,
+                                                                       'content_object': profile})
+            subscribers.append(contact)
+        when = str(datetime.now()).split('.')[0]
+        new_mailing = MailingList(name=_('New mailinglist at %s') % when,
+                                  description=_('New mailing list created from admin/directory %s') % when)
+        new_mailing.save()
+        for subscriber in subscribers:
+            new_mailing.subscribers.add(subscriber)
+        new_mailing.save()
+        
+        self.message_user(request, _('%s succesfully created.') % new_mailing)
+        return HttpResponseRedirect(reverse('admin:newsletter_mailinglist_change',
+                                            args=[new_mailing.pk,]))
+    make_mailinglist.short_description = _('Create a mailing list')
 
 admin.site.register(Profile, ProfileAdmin)
 
