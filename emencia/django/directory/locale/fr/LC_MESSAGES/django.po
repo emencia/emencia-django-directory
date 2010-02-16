@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emencia.django.directory\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-16 16:23+0100\n"
+"PO-Revision-Date: 2010-02-16 15:50+0100\n"
+"Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
+"Language-Team: fr <fantomas42@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: admin.py:35
+msgid "Contact"
+msgstr "Contact"
+
+#: admin.py:36
+msgid "Address"
+msgstr "Adresse"
+
+#: admin.py:38
+msgid "Position"
+msgstr "Position"
+
+#: admin.py:39
+msgid "Personnal"
+msgstr "Infos. personnelles"
+
+#: admin.py:40
+msgid "Classification"
+msgstr "Classification"
+
+#: admin.py:42
+msgid "Misc."
+msgstr "Divers"
+
+#: admin.py:49
+msgid "Full name"
+msgstr "Profil"
+
+#: admin.py:53
+msgid "Groups"
+msgstr "Groupes"
+
+#: admin.py:57 models.py:28
+msgid "Categories"
+msgstr "Catégories"
+
+#: models.py:13
+msgid "name"
+msgstr "nom"
+
+#: models.py:14
+msgid "description"
+msgstr "description"
+
+#: models.py:15 models.py:110
+msgid "slug"
+msgstr "slug"
+
+#: models.py:27
+msgid "Category"
+msgstr "Catégorie"
+
+#: models.py:34
+msgid "Nature"
+msgstr "Nature"
+
+#: models.py:35
+msgid "Natures"
+msgstr "Natures"
+
+#: models.py:41 models.py:42
+msgid "Company"
+msgstr "Société"
+
+#: models.py:48 models.py:49
+msgid "Country"
+msgstr "Pays"
+
+#: models.py:55
+msgid "unknown"
+msgstr "Inconnu"
+
+#: models.py:56
+msgid "mlle"
+msgstr "Mademoiselle"
+
+#: models.py:57
+msgid "mme"
+msgstr "Madame"
+
+#: models.py:58
+msgid "mr"
+msgstr "Monsieur"
+
+#: models.py:59
+msgid "mlle, mr"
+msgstr "Mademoiselle, Monsieur"
+
+#: models.py:60
+msgid "mme, mr"
+msgstr "Madame, Monsieur"
+
+#: models.py:61
+msgid "mmes"
+msgstr "Mesdames"
+
+#: models.py:62
+msgid "mrs"
+msgstr "Messieurs"
+
+#: models.py:65
+msgid "civility"
+msgstr "civilité"
+
+#: models.py:67
+msgid "first name"
+msgstr "prénom"
+
+#: models.py:68
+msgid "last name"
+msgstr "nom"
+
+#: models.py:71
+msgid "e-mail"
+msgstr "email"
+
+#: models.py:72
+msgid "phone"
+msgstr "téléphone"
+
+#: models.py:73
+msgid "mobile"
+msgstr "mobile"
+
+#: models.py:74
+msgid "fax"
+msgstr "fax"
+
+#: models.py:77
+msgid "address 1"
+msgstr "adresse 1"
+
+#: models.py:78
+msgid "address 2"
+msgstr "adresse 2"
+
+#: models.py:79
+msgid "address comments"
+msgstr "commentaires sur l'adresse"
+
+#: models.py:80
+msgid "postal code"
+msgstr "code postal"
+
+#: models.py:81
+msgid "city"
+msgstr "ville"
+
+#: models.py:82
+msgid "country"
+msgstr "pays"
+
+#: models.py:83
+msgid "latitude"
+msgstr "latitude"
+
+#: models.py:84
+msgid "longitude"
+msgstr "longitude"
+
+#: models.py:87
+msgid "language"
+msgstr "langage"
+
+#: models.py:90
+msgid "birthdate"
+msgstr "date de naissance"
+
+#: models.py:90
+msgid "yyyy-mm-dd format"
+msgstr "au format aaaa-mm-dd"
+
+#: models.py:92
+msgid "company"
+msgstr "société"
+
+#: models.py:94
+msgid "function"
+msgstr "fonction"
+
+#: models.py:97
+msgid "reference"
+msgstr "réference interne"
+
+#: models.py:98
+msgid "nature"
+msgstr "nature"
+
+#: models.py:100
+msgid "categories"
+msgstr "catégories"
+
+#: models.py:101
+msgid "tags"
+msgstr "tags"
+
+#: models.py:102
+msgid "comments"
+msgstr "commentaires"
+
+#: models.py:105
+msgid "creation date"
+msgstr "date de création"
+
+#: models.py:106
+msgid "modification date"
+msgstr "date de modification"
+
+#: models.py:107
+msgid "groups"
+msgstr "groupes"
+
+#: models.py:109
+msgid "visible"
+msgstr "visible au public"
+
+#: models.py:123
+msgid "Profile"
+msgstr "Profil"
+
+#: models.py:124
+msgid "Profiles"
+msgstr "Profils"
