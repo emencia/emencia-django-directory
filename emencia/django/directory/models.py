@@ -6,6 +6,8 @@ from django.contrib.auth.models import Group
 
 from tagging.fields import TagField
 
+from emencia.django.directory.managers import ProfileManager
+
 class AbstractCategory(models.Model):
     """Abstract Model for categorization"""
     name = models.CharField(_('name'), max_length=255)
@@ -78,11 +80,14 @@ class Profile(models.Model):
     postal_code = models.CharField(_('postal code'), max_length=20, blank=True)
     city = models.CharField(_('city'), max_length=255, blank=True)
     country = models.ForeignKey(Country, verbose_name=_('country'))
+    lat = models.CharField(_('latitude'), max_length=30, blank=True)
+    lng = models.CharField(_('longitude'), max_length=30, blank=True)
 
     # Personnal info
     language = models.CharField(_('language'), max_length=10, blank=True,
-                                choices=settings.LANGUAGES)
-    birthdate = models.DateField(_('birthdate'), default='aaaa-mm-jj',
+                                choices=settings.LANGUAGES,
+                                default=settings.LANGUAGES[0][0])
+    birthdate = models.DateField(_('birthdate'), help_text=_('yyyy-mm-dd format'),
                                  blank=True, null=True)
     company = models.ForeignKey(Company, verbose_name=_('company'),
                                 null=True, blank=True)
@@ -101,11 +106,18 @@ class Profile(models.Model):
     modification_date = models.DateTimeField(_('modification date'), auto_now=True)
     groups = models.ManyToManyField(Group, verbose_name=_('groups'),
                                     null=True, blank=True)
+    visible = models.BooleanField(_('visible'), default=True)
     slug = models.SlugField(_('slug'))
 
+    objects = ProfileManager()
+    
     def __unicode__(self):
         return '%s %s %s' % (self.get_civility_display(),
                              self.first_name, self.last_name)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('directory_profile_detail', (self.slug,))
 
     class Meta:
         verbose_name = _('Profile')

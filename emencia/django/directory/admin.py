@@ -23,12 +23,10 @@ admin.site.register(Country, AbstractCategoryAdmin)
 
 class ProfileAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
-    list_display_links = ('civility', 'first_name', 'last_name')
-    list_display = ('civility', 'first_name', 'last_name',
-                    'email', 'company', 'country', 'get_groups',
+    list_display = ('fullname', 'email', 'company', 'country', 'get_groups',
                     'language', 'nature', 'get_categories', 'tags')
     list_filter = ('civility', 'groups', 'language', 'nature', 'categories',
-                   'country', 'creation_date')
+                   'country', 'creation_date', 'visible')
     search_fields = ('first_name', 'last_name', 'email', 'company', 'city', 'address_1',
                      'address_2', 'postal_code', 'city', 'address_comments', 'tags',
                      'comments', 'phone', 'mobile', 'fax', 'function', 'reference', 'slug')
@@ -36,13 +34,19 @@ class ProfileAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': ('civility', 'first_name', 'last_name',)}),
                  (_('Contact'), {'fields': ('email', 'phone', 'mobile', 'fax')}),
                  (_('Address'), {'fields': ('address_1', 'address_2', 'postal_code', 'city',
-                                            'country', 'address_comments')}),                 
+                                            'country', 'address_comments')}),
+                 (_('Position'), {'fields': ('lat', 'lng')}),
                  (_('Personnal'), {'fields': ('language', 'birthdate', 'company', 'function',)}),
                  (_('Classification'), {'fields': ('reference', 'nature',
                                                    'categories', 'tags', 'groups')}),
-                 (_('Misc.'), {'fields': ('comments', 'slug',)}))
+                 (_('Misc.'), {'fields': ('comments', 'slug', 'visible')}))
+    prepopulated_fields = {'slug': ('first_name', 'last_name', 'language',)}
     actions_on_top = False
     actions_on_bottom = True
+
+    def fullname(self, contact):
+        return contact.__unicode__()
+    fullname.short_description = _('Full name')
 
     def get_groups(self, contact):
         return ', '.join([group.name for section in contact.groups.all()])
@@ -51,7 +55,6 @@ class ProfileAdmin(admin.ModelAdmin):
     def get_categories(self, contact):
         return ', '.join([category.name for category in contact.categories.all()])
     get_categories.short_description = _('Categories')
-
 
 admin.site.register(Profile, ProfileAdmin)
 
