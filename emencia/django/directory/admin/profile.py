@@ -2,7 +2,9 @@
 from datetime import datetime
 
 from django import forms
+from django.forms.util import ErrorList
 from django.contrib import admin
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect
@@ -14,15 +16,36 @@ class ProfileChangeForm(forms.ModelForm):
     username = forms.RegexField(label=_('Username'), max_length=30, regex=r'^\w+$', required=False,
                                 help_text = _('Required. 30 characters or fewer. Alphanumeric characters only (letters, digits and underscores).'),
                                 error_message = _('This value must contain only letters, numbers and underscores.'))
+    first_name = forms.CharField(label=_('First name'), max_length=30, required=True)
+    last_name = forms.CharField(label=_('Last name'), max_length=30, required=True)
     password = forms.CharField(label=_('Password'), max_length=128, required=False)
     email = forms.EmailField(label=_('Email'), max_length=75, required=True)
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        if username and not password:
+            self._errors['password'] = ErrorList([_('You must define a password for your username.')])
+        if password and not username:
+            self._errors['username'] = ErrorList([_('You must define an username if you set a password.')])
+        
+        return self.cleaned_data
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        try:
+            User.objects.get(username=username)
+        except User.DoesNotExist:
+            return username
+        raise forms.ValidationError(_('A user with that username already exists.'))
     
     class Meta:
         model = Profile
 
 class ProfileAdmin(admin.ModelAdmin):
-    date_hierarchy = 'date_joined'
     form = ProfileChangeForm
+    date_hierarchy = 'date_joined'
     list_display = ('fullname', 'email', 'company', 'country', 'get_sections', 'get_groups',
                     'is_active', 'is_staff', 'language', 'nature', 'get_categories', 'tags')
     list_filter = ('is_active', 'is_staff', 'civility', 'groups', 'language', 'nature',
@@ -70,6 +93,11 @@ class ProfileAdmin(admin.ModelAdmin):
     def get_sections(self, contact):
         return ', '.join([section.name for section in contact.sections.all()])
     get_sections.short_description = _('Sections')
+    
+    def save_model(admin, request, profile, form, change):
+        if not profile.password.startswith('sha'):
+            profile.set_password(profile.password)
+        profile.save()                                            
 
     def make_mailinglist(self, request, queryset):
         """Create a mailing list from the profile list"""

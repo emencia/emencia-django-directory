@@ -111,7 +111,7 @@ class Profile(User):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('directory_profile_detail', (self.slug,))
+        return ('directory_profile_detail', (self.username,))
 
     class Meta:
         verbose_name = _('Profile')
