@@ -36,6 +36,13 @@ class Nature(AbstractCategory):
         verbose_name = _('Nature')
         verbose_name_plural = _('Natures')
 
+class Section(AbstractCategory):
+    """Section Model"""
+
+    class Meta:
+        verbose_name = _('Section')
+        verbose_name_plural = _('Sections')
+
 class Company(AbstractCategory):
     """Company Model"""
 
@@ -58,11 +65,7 @@ class Profile(User):
     # Civility
     civility = models.IntegerField(_('civility'), choices=CIVILITY_CHOICES,
                                    default=0)
-    #first_name = models.CharField(_('first name'), max_length=100)
-    #last_name = models.CharField(_('last name'), max_length=100)
-
     # Contact
-    #email = models.EmailField(_('e-mail'))
     phone = models.CharField(_('phone'), max_length=15, blank=True)
     mobile = models.CharField(_('mobile'), max_length=15, blank=True)
     fax = models.CharField(_('fax'), max_length=15, blank=True)
@@ -92,22 +95,13 @@ class Profile(User):
     nature = models.ForeignKey(Nature, verbose_name=_('nature'),
                                null=True, blank=True)
     categories = models.ManyToManyField(Category, verbose_name=_('categories'))
+    sections = models.ManyToManyField(Section, verbose_name=_('sections'))
     tags = TagField(_('tags'), blank=True)
     comments = models.TextField(_('comments'), blank=True)
 
     # Meta Data
-    #creation_date = models.DateTimeField(_('creation date'), auto_now_add=True)
     modification_date = models.DateTimeField(_('modification date'), auto_now=True)
-    #groups = models.ManyToManyField(Group, verbose_name=_('groups'),
-    #                                null=True, blank=True)
     visible = models.BooleanField(_('visible'), default=True)
-    slug = models.SlugField(_('slug'))
-
-    # Overriding
-    #username = models.CharField(_('username'), max_length=30, unique=True, blank=True,
-    #                            help_text=_("Required. 30 characters or fewer. Alphanumeric characters only (letters, digits and underscores)."))
-    #password = models.CharField(_('password'), max_length=128, blank=True,
-    #                            help_text=_("Use '[algo]$[salt]$[hexdigest]' or use the <a href=\"password/\">change password form</a>."))
     
     objects = ProfileManager()
     
