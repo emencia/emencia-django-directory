@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emencia.django.directory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 16:23+0100\n"
-"PO-Revision-Date: 2010-02-16 15:50+0100\n"
+"POT-Creation-Date: 2010-02-17 11:00+0100\n"
+"PO-Revision-Date: 2010-02-17 11:02+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: fr <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -18,226 +18,259 @@ msgstr ""
 "X-Poedit-Country: FRANCE\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: admin.py:35
+#: admin.py:38
 msgid "Contact"
 msgstr "Contact"
 
-#: admin.py:36
+#: admin.py:39
 msgid "Address"
 msgstr "Adresse"
 
-#: admin.py:38
+#: admin.py:41
 msgid "Position"
 msgstr "Position"
 
-#: admin.py:39
+#: admin.py:42
 msgid "Personnal"
 msgstr "Infos. personnelles"
 
-#: admin.py:40
+#: admin.py:43
 msgid "Classification"
 msgstr "Classification"
 
-#: admin.py:42
+#: admin.py:45
 msgid "Misc."
 msgstr "Divers"
 
-#: admin.py:49
+#: admin.py:59
 msgid "Full name"
 msgstr "Profil"
 
-#: admin.py:53
+#: admin.py:63
 msgid "Groups"
 msgstr "Groupes"
 
-#: admin.py:57 models.py:28
+#: admin.py:67
+#: models.py:29
 msgid "Categories"
 msgstr "Catégories"
 
-#: models.py:13
+#: admin.py:82
+#, python-format
+msgid "New mailinglist at %s"
+msgstr "Liste de diffusion créée à %s"
+
+#: admin.py:83
+#, python-format
+msgid "New mailing list created from admin/directory %s"
+msgstr "Nouvelle liste de diffusion créée depuis admin/directory à %s"
+
+#: admin.py:89
+#, python-format
+msgid "%s succesfully created."
+msgstr "%s créé avec succès."
+
+#: admin.py:92
+msgid "Create a mailing list"
+msgstr "Créer une liste de diffusion"
+
+#: models.py:14
 msgid "name"
 msgstr "nom"
 
-#: models.py:14
+#: models.py:15
 msgid "description"
 msgstr "description"
 
-#: models.py:15 models.py:110
+#: models.py:16
+#: models.py:103
 msgid "slug"
 msgstr "slug"
 
-#: models.py:27
+#: models.py:28
 msgid "Category"
 msgstr "Catégorie"
 
-#: models.py:34
+#: models.py:35
 msgid "Nature"
 msgstr "Nature"
 
-#: models.py:35
+#: models.py:36
 msgid "Natures"
 msgstr "Natures"
 
-#: models.py:41 models.py:42
+#: models.py:42
 msgid "Company"
 msgstr "Société"
 
-#: models.py:48 models.py:49
-msgid "Country"
-msgstr "Pays"
+#: models.py:43
+msgid "Companies"
+msgstr "Sociétés"
 
-#: models.py:55
+#: models.py:48
 msgid "unknown"
 msgstr "Inconnu"
 
-#: models.py:56
+#: models.py:49
 msgid "mlle"
 msgstr "Mademoiselle"
 
-#: models.py:57
+#: models.py:50
 msgid "mme"
 msgstr "Madame"
 
-#: models.py:58
+#: models.py:51
 msgid "mr"
 msgstr "Monsieur"
 
-#: models.py:59
+#: models.py:52
 msgid "mlle, mr"
 msgstr "Mademoiselle, Monsieur"
 
-#: models.py:60
+#: models.py:53
 msgid "mme, mr"
 msgstr "Madame, Monsieur"
 
-#: models.py:61
+#: models.py:54
 msgid "mmes"
 msgstr "Mesdames"
 
-#: models.py:62
+#: models.py:55
 msgid "mrs"
 msgstr "Messieurs"
 
-#: models.py:65
+#: models.py:58
 msgid "civility"
 msgstr "civilité"
 
-#: models.py:67
+#: models.py:60
 msgid "first name"
 msgstr "prénom"
 
-#: models.py:68
+#: models.py:61
 msgid "last name"
 msgstr "nom"
 
-#: models.py:71
+#: models.py:64
 msgid "e-mail"
 msgstr "email"
 
-#: models.py:72
+#: models.py:65
 msgid "phone"
 msgstr "téléphone"
 
-#: models.py:73
+#: models.py:66
 msgid "mobile"
 msgstr "mobile"
 
-#: models.py:74
+#: models.py:67
 msgid "fax"
 msgstr "fax"
 
-#: models.py:77
+#: models.py:70
 msgid "address 1"
 msgstr "adresse 1"
 
-#: models.py:78
+#: models.py:71
 msgid "address 2"
 msgstr "adresse 2"
 
-#: models.py:79
+#: models.py:72
 msgid "address comments"
 msgstr "commentaires sur l'adresse"
 
-#: models.py:80
+#: models.py:73
 msgid "postal code"
 msgstr "code postal"
 
-#: models.py:81
+#: models.py:74
 msgid "city"
 msgstr "ville"
 
-#: models.py:82
+#: models.py:75
 msgid "country"
 msgstr "pays"
 
-#: models.py:83
+#: models.py:76
 msgid "latitude"
 msgstr "latitude"
 
-#: models.py:84
+#: models.py:77
 msgid "longitude"
 msgstr "longitude"
 
-#: models.py:87
+#: models.py:80
 msgid "language"
 msgstr "langage"
 
-#: models.py:90
+#: models.py:83
 msgid "birthdate"
 msgstr "date de naissance"
 
-#: models.py:90
+#: models.py:83
 msgid "yyyy-mm-dd format"
 msgstr "au format aaaa-mm-dd"
 
-#: models.py:92
+#: models.py:85
 msgid "company"
 msgstr "société"
 
-#: models.py:94
+#: models.py:87
 msgid "function"
 msgstr "fonction"
 
-#: models.py:97
+#: models.py:90
 msgid "reference"
 msgstr "réference interne"
 
-#: models.py:98
+#: models.py:91
 msgid "nature"
 msgstr "nature"
 
-#: models.py:100
+#: models.py:93
 msgid "categories"
 msgstr "catégories"
 
-#: models.py:101
+#: models.py:94
 msgid "tags"
 msgstr "tags"
 
-#: models.py:102
+#: models.py:95
 msgid "comments"
 msgstr "commentaires"
 
-#: models.py:105
+#: models.py:98
 msgid "creation date"
 msgstr "date de création"
 
-#: models.py:106
+#: models.py:99
 msgid "modification date"
 msgstr "date de modification"
 
-#: models.py:107
+#: models.py:100
 msgid "groups"
 msgstr "groupes"
 
-#: models.py:109
+#: models.py:102
 msgid "visible"
 msgstr "visible au public"
 
-#: models.py:123
+#: models.py:116
 msgid "Profile"
 msgstr "Profil"
 
-#: models.py:124
+#: models.py:117
 msgid "Profiles"
 msgstr "Profils"
+
+#: templates/directory/profile_list.html:4
+msgid "Profile list"
+msgstr "Liste des profils"
+
+#: templates/directory/profile_list.html:13
+msgid "No profiles"
+msgstr "Pas de profils"
+
+#~ msgid "Country"
+#~ msgstr "Pays"
+

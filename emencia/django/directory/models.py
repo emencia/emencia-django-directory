@@ -40,7 +40,7 @@ class Company(AbstractCategory):
 
     class Meta:
         verbose_name = _('Company')
-        verbose_name_plural = _('Company')
+        verbose_name_plural = _('Companies')
 
 class Profile(models.Model):
     """Profile Model"""
