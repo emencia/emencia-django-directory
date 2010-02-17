@@ -29,6 +29,7 @@ setup(name='emencia.django.directory',
       install_requires=[
           'setuptools',
           'tagging',
+          #'emencia.django.countries',
       ],
       entry_points="""
       # -*- Entry points: -*-
