@@ -1,6 +1,7 @@
 """Admin for emencia.django.directory Profile"""
 from datetime import datetime
 
+from django import forms
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
@@ -9,31 +10,41 @@ from django.http import HttpResponseRedirect
 from emencia.django.directory import settings
 from emencia.django.directory.models import Profile
 
+class ProfileChangeForm(forms.ModelForm):
+    username = forms.RegexField(label=_('Username'), max_length=30, regex=r'^\w+$', required=False,
+                                help_text = _('Required. 30 characters or fewer. Alphanumeric characters only (letters, digits and underscores).'),
+                                error_message = _('This value must contain only letters, numbers and underscores.'))
+    password = forms.CharField(label=_('Password'), max_length=128, required=False)
+    email = forms.EmailField(label=_('Email'), max_length=75, required=True)
+    
+    class Meta:
+        model = Profile
+
 class ProfileAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_joined'
-    list_display = ('fullname', 'email', 'company', 'country', 'get_groups', 
+    form = ProfileChangeForm
+    list_display = ('fullname', 'email', 'company', 'country', 'get_sections', 'get_groups',
                     'is_active', 'is_staff', 'language', 'nature', 'get_categories', 'tags')
     list_filter = ('is_active', 'is_staff', 'civility', 'groups', 'language', 'nature',
                    'categories', 'country', 'date_joined', 'visible')
     search_fields = ('first_name', 'last_name', 'email', 'company', 'city', 'address_1',
                      'address_2', 'postal_code', 'city', 'address_comments', 'tags', 'username',
-                     'comments', 'phone', 'mobile', 'fax', 'function', 'reference', 'slug')
-    filter_horizontal = ['categories', 'groups', 'user_permissions',]
+                     'comments', 'phone', 'mobile', 'fax', 'function', 'reference',)
+    filter_horizontal = ['categories', 'groups', 'user_permissions', 'sections',]
     fieldsets = ((None, {'fields': ('civility', 'first_name', 'last_name',)}),
                  (_('Contact'), {'fields': ('email', 'phone', 'mobile', 'fax')}),
                  (_('Address'), {'fields': ('address_1', 'address_2', 'postal_code', 'city',
                                             'country', 'address_comments')}),
                  (_('Position'), {'fields': ('lat', 'lng'),
                                   'classes': ('collapse',),}),
-                 (_('Access'), {'fields': ('username', 'password', 'is_active',
-                                           'is_staff', 'is_superuser', 'last_login',
-                                           'user_permissions', 'groups'),
-                                'classes': ('collapse',),}),
                  (_('Personnal'), {'fields': ('language', 'birthdate', 'company', 'function',)}),
+                 (_('User Access'), {'fields': ('username', 'password', 'is_active',
+                                                'is_staff', 'is_superuser', 'last_login',
+                                                'user_permissions', 'groups'),
+                                'classes': ('collapse',),}),
                  (_('Classification'), {'fields': ('reference', 'nature',
-                                                   'categories', 'tags')}),
-                 (_('Misc.'), {'fields': ('comments', 'slug', 'visible', 'date_joined')}))
-    prepopulated_fields = {'slug': ('first_name', 'last_name', 'language',)}
+                                                   'categories', 'sections', 'tags')}),
+                 (_('Misc.'), {'fields': ('comments', 'visible', 'date_joined')}))
     actions_on_top = False
     actions_on_bottom = True
     actions = ['make_mailinglist',]
@@ -55,6 +66,10 @@ class ProfileAdmin(admin.ModelAdmin):
     def get_categories(self, contact):
         return ', '.join([category.name for category in contact.categories.all()])
     get_categories.short_description = _('Categories')
+
+    def get_sections(self, contact):
+        return ', '.join([section.name for section in contact.sections.all()])
+    get_sections.short_description = _('Sections')
 
     def make_mailinglist(self, request, queryset):
         """Create a mailing list from the profile list"""
