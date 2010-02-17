@@ -1,4 +1,4 @@
-"""Admin for emencia.django.directory"""
+"""Admin for emencia.django.directory Profile"""
 from datetime import datetime
 
 from django.contrib import admin
@@ -7,42 +7,32 @@ from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect
 
 from emencia.django.directory import settings
-from emencia.django.directory.models import Category
-from emencia.django.directory.models import Nature
-from emencia.django.directory.models import Company
 from emencia.django.directory.models import Profile
 
-class AbstractCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
-    fieldsets = ((None, {'fields': ('name', 'description')}),
-                 (None, {'fields': ('slug',)}),)
-    prepopulated_fields = {'slug': ('name',)}
-    actions_on_top = False
-    actions_on_bottom = True
-
-admin.site.register(Category, AbstractCategoryAdmin)
-admin.site.register(Nature, AbstractCategoryAdmin)
-admin.site.register(Company, AbstractCategoryAdmin)
-
 class ProfileAdmin(admin.ModelAdmin):
-    date_hierarchy = 'creation_date'
-    list_display = ('fullname', 'email', 'company', 'country', 'get_groups',
-                    'language', 'nature', 'get_categories', 'tags')
-    list_filter = ('civility', 'groups', 'language', 'nature', 'categories',
-                   'country', 'creation_date', 'visible')
+    date_hierarchy = 'date_joined'
+    list_display = ('fullname', 'email', 'company', 'country', 'get_groups', 
+                    'is_active', 'is_staff', 'language', 'nature', 'get_categories', 'tags')
+    list_filter = ('is_active', 'is_staff', 'civility', 'groups', 'language', 'nature',
+                   'categories', 'country', 'date_joined', 'visible')
     search_fields = ('first_name', 'last_name', 'email', 'company', 'city', 'address_1',
-                     'address_2', 'postal_code', 'city', 'address_comments', 'tags',
+                     'address_2', 'postal_code', 'city', 'address_comments', 'tags', 'username',
                      'comments', 'phone', 'mobile', 'fax', 'function', 'reference', 'slug')
-    filter_horizontal = ['categories', 'groups']
+    filter_horizontal = ['categories', 'groups', 'user_permissions',]
     fieldsets = ((None, {'fields': ('civility', 'first_name', 'last_name',)}),
                  (_('Contact'), {'fields': ('email', 'phone', 'mobile', 'fax')}),
                  (_('Address'), {'fields': ('address_1', 'address_2', 'postal_code', 'city',
                                             'country', 'address_comments')}),
-                 (_('Position'), {'fields': ('lat', 'lng')}),
+                 (_('Position'), {'fields': ('lat', 'lng'),
+                                  'classes': ('collapse',),}),
+                 (_('Access'), {'fields': ('username', 'password', 'is_active',
+                                           'is_staff', 'is_superuser', 'last_login',
+                                           'user_permissions', 'groups'),
+                                'classes': ('collapse',),}),
                  (_('Personnal'), {'fields': ('language', 'birthdate', 'company', 'function',)}),
                  (_('Classification'), {'fields': ('reference', 'nature',
-                                                   'categories', 'tags', 'groups')}),
-                 (_('Misc.'), {'fields': ('comments', 'slug', 'visible')}))
+                                                   'categories', 'tags')}),
+                 (_('Misc.'), {'fields': ('comments', 'slug', 'visible', 'date_joined')}))
     prepopulated_fields = {'slug': ('first_name', 'last_name', 'language',)}
     actions_on_top = False
     actions_on_bottom = True
@@ -91,5 +81,4 @@ class ProfileAdmin(admin.ModelAdmin):
                                             args=[new_mailing.pk,]))
     make_mailinglist.short_description = _('Create a mailing list')
 
-admin.site.register(Profile, ProfileAdmin)
 
