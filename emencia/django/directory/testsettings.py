@@ -4,6 +4,7 @@ DATABASE_ENGINE = 'sqlite3'
 DATABASE_NAME = '/tmp/directory.db'
 INSTALLED_APPS = ['django.contrib.contenttypes',
                   'tagging',
+                  'emencia.django.countries',
                   'emencia.django.directory',]
 
 LANGUAGE_CODE = 'fr'

@@ -1,7 +1,7 @@
 """Unit tests for emencia.django.directory"""
 from django.test import TestCase
 
-from emencia.django.directory.models import Country
+from emencia.django.countries.models import Country
 from emencia.django.directory.models import Category
 from emencia.django.directory.models import Profile
 
@@ -9,7 +9,7 @@ class ProfileTestCase(TestCase):
     """Tests for Profile model"""
 
     def setUp(self):
-        self.country = Country.objects.create(name='France', slug='slug')
+        self.country = Country.objects.get(iso='FR')
 
     def test_manager_published(self):
         Profile.objects.create(first_name='John', last_name='Kennedy',
