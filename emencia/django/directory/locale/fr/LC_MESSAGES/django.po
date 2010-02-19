@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emencia.django.directory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 14:41+0100\n"
-"PO-Revision-Date: 2010-02-17 14:42+0100\n"
+"POT-Creation-Date: 2010-02-19 15:02+0100\n"
+"PO-Revision-Date: 2010-02-19 15:02+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: fr <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -61,6 +61,7 @@ msgid "Company"
 msgstr "Société"
 
 #: models.py:51
+#: admin/profile.py:99
 msgid "Companies"
 msgstr "Sociétés"
 
@@ -157,8 +158,8 @@ msgid "yyyy-mm-dd format"
 msgstr "au format aaaa-mm-dd"
 
 #: models.py:89
-msgid "company"
-msgstr "société"
+msgid "companies"
+msgstr "sociétés"
 
 #: models.py:91
 msgid "function"
@@ -280,22 +281,22 @@ msgstr "Profil"
 msgid "Groups"
 msgstr "Groupes"
 
-#: admin/profile.py:115
+#: admin/profile.py:119
 #, python-format
 msgid "New mailinglist at %s"
 msgstr "Liste de diffusion créée à %s"
 
-#: admin/profile.py:116
+#: admin/profile.py:120
 #, python-format
 msgid "New mailing list created from admin/directory %s"
 msgstr "Nouvelle liste de diffusion créée depuis admin/directory à %s"
 
-#: admin/profile.py:122
+#: admin/profile.py:126
 #, python-format
 msgid "%s succesfully created."
 msgstr "%s créé avec succès."
 
-#: admin/profile.py:125
+#: admin/profile.py:129
 msgid "Create a mailing list"
 msgstr "Créer une liste de diffusion"
 
@@ -307,6 +308,8 @@ msgstr "Liste des profils"
 msgid "No profiles"
 msgstr "Pas de profils"
 
+#~ msgid "company"
+#~ msgstr "société"
 #~ msgid "creation date"
 #~ msgstr "date de création"
 #~ msgid "groups"

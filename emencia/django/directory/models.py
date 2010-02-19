@@ -86,8 +86,8 @@ class Profile(User):
                                 default=settings.LANGUAGES[0][0])
     birthdate = models.DateField(_('birthdate'), help_text=_('yyyy-mm-dd format'),
                                  blank=True, null=True)
-    company = models.ForeignKey(Company, verbose_name=_('company'),
-                                null=True, blank=True)
+    companies = models.ManyToManyField(Company, verbose_name=_('companies'),
+                                       null=True, blank=True)
     function = models.CharField(_('function'), max_length=255, blank=True)
 
     # Internal classification

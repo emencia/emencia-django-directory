@@ -46,21 +46,21 @@ class ProfileChangeForm(forms.ModelForm):
 class ProfileAdmin(admin.ModelAdmin):
     form = ProfileChangeForm
     date_hierarchy = 'date_joined'
-    list_display = ('fullname', 'email', 'company', 'country', 'get_sections', 'get_groups',
+    list_display = ('fullname', 'email', 'get_companies', 'country', 'get_sections', 'get_groups',
                     'is_active', 'is_staff', 'language', 'nature', 'get_categories', 'tags')
     list_filter = ('is_active', 'is_staff', 'civility', 'groups', 'language', 'nature',
                    'categories', 'country', 'date_joined', 'visible')
-    search_fields = ('first_name', 'last_name', 'email', 'company', 'city', 'address_1',
+    search_fields = ('first_name', 'last_name', 'email', 'city', 'address_1',
                      'address_2', 'postal_code', 'city', 'address_comments', 'tags', 'username',
                      'comments', 'phone', 'mobile', 'fax', 'function', 'reference',)
-    filter_horizontal = ['categories', 'groups', 'user_permissions', 'sections',]
+    filter_horizontal = ['categories', 'groups', 'user_permissions', 'sections', 'companies']
     fieldsets = ((None, {'fields': ('civility', 'first_name', 'last_name',)}),
                  (_('Contact'), {'fields': ('email', 'phone', 'mobile', 'fax')}),
                  (_('Address'), {'fields': ('address_1', 'address_2', 'postal_code', 'city',
                                             'country', 'address_comments')}),
                  (_('Position'), {'fields': ('lat', 'lng'),
                                   'classes': ('collapse',),}),
-                 (_('Personnal'), {'fields': ('language', 'birthdate', 'company', 'function',)}),
+                 (_('Personnal'), {'fields': ('language', 'birthdate', 'companies', 'function',)}),
                  (_('User Access'), {'fields': ('username', 'password', 'is_active',
                                                 'is_staff', 'is_superuser', 'last_login',
                                                 'user_permissions', 'groups'),
@@ -93,6 +93,10 @@ class ProfileAdmin(admin.ModelAdmin):
     def get_sections(self, contact):
         return ', '.join([section.name for section in contact.sections.all()])
     get_sections.short_description = _('Sections')
+
+    def get_companies(self, contact):
+        return ', '.join([company.name for company in contact.companies.all()])
+    get_companies.short_description = _('Companies')
     
     def save_model(admin, request, profile, form, change):
         if not profile.password.startswith('sha'):
