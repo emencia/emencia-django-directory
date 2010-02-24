@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emencia.django.directory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-19 15:02+0100\n"
-"PO-Revision-Date: 2010-02-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-24 10:19+0100\n"
+"PO-Revision-Date: 2010-02-24 10:19+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: fr <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -31,39 +31,40 @@ msgid "slug"
 msgstr "slug"
 
 #: models.py:29
-msgid "Category"
-msgstr "Catégorie"
+msgid "category"
+msgstr "catégorie"
 
 #: models.py:30
-#: admin/profile.py:91
-msgid "Categories"
-msgstr "Catégories"
+#: models.py:97
+msgid "categories"
+msgstr "catégories"
 
 #: models.py:36
-msgid "Nature"
-msgstr "Nature"
+#: models.py:95
+msgid "nature"
+msgstr "nature"
 
 #: models.py:37
-msgid "Natures"
-msgstr "Natures"
+msgid "natures"
+msgstr "natures"
 
 #: models.py:43
-msgid "Section"
-msgstr "Section"
+msgid "section"
+msgstr "section"
 
 #: models.py:44
-#: admin/profile.py:95
-msgid "Sections"
-msgstr "Sections"
+#: models.py:98
+msgid "sections"
+msgstr "sections"
 
 #: models.py:50
-msgid "Company"
-msgstr "Société"
+msgid "company"
+msgstr "société"
 
 #: models.py:51
-#: admin/profile.py:99
-msgid "Companies"
-msgstr "Sociétés"
+#: models.py:89
+msgid "companies"
+msgstr "sociétés"
 
 #: models.py:56
 msgid "unknown"
@@ -157,10 +158,6 @@ msgstr "date de naissance"
 msgid "yyyy-mm-dd format"
 msgstr "au format aaaa-mm-dd"
 
-#: models.py:89
-msgid "companies"
-msgstr "sociétés"
-
 #: models.py:91
 msgid "function"
 msgstr "fonction"
@@ -168,18 +165,6 @@ msgstr "fonction"
 #: models.py:94
 msgid "reference"
 msgstr "réference interne"
-
-#: models.py:95
-msgid "nature"
-msgstr "nature"
-
-#: models.py:97
-msgid "categories"
-msgstr "catégories"
-
-#: models.py:98
-msgid "sections"
-msgstr "sections"
 
 #: models.py:99
 msgid "tags"
@@ -198,12 +183,12 @@ msgid "visible"
 msgstr "visible au public"
 
 #: models.py:117
-msgid "Profile"
-msgstr "Profil"
+msgid "profile"
+msgstr "profil"
 
 #: models.py:118
-msgid "Profiles"
-msgstr "Profils"
+msgid "profiles"
+msgstr "profils"
 
 #: admin/profile.py:16
 msgid "Username"
@@ -281,6 +266,18 @@ msgstr "Profil"
 msgid "Groups"
 msgstr "Groupes"
 
+#: admin/profile.py:91
+msgid "Categories"
+msgstr "Catégories"
+
+#: admin/profile.py:95
+msgid "Sections"
+msgstr "Sections"
+
+#: admin/profile.py:99
+msgid "Companies"
+msgstr "Sociétés"
+
 #: admin/profile.py:119
 #, python-format
 msgid "New mailinglist at %s"
@@ -308,8 +305,14 @@ msgstr "Liste des profils"
 msgid "No profiles"
 msgstr "Pas de profils"
 
-#~ msgid "company"
-#~ msgstr "société"
+#~ msgid "Nature"
+#~ msgstr "Nature"
+#~ msgid "Natures"
+#~ msgstr "Natures"
+#~ msgid "Section"
+#~ msgstr "Section"
+#~ msgid "Company"
+#~ msgstr "Société"
 #~ msgid "creation date"
 #~ msgstr "date de création"
 #~ msgid "groups"

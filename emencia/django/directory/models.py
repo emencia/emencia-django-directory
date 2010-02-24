@@ -26,29 +26,29 @@ class Category(AbstractCategory):
     """Category Model"""
 
     class Meta:
-        verbose_name = _('Category')
-        verbose_name_plural = _('Categories')
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
 
 class Nature(AbstractCategory):
     """Nature Model"""
 
     class Meta:
-        verbose_name = _('Nature')
-        verbose_name_plural = _('Natures')
+        verbose_name = _('nature')
+        verbose_name_plural = _('natures')
 
 class Section(AbstractCategory):
     """Section Model"""
 
     class Meta:
-        verbose_name = _('Section')
-        verbose_name_plural = _('Sections')
+        verbose_name = _('section')
+        verbose_name_plural = _('sections')
 
 class Company(AbstractCategory):
     """Company Model"""
 
     class Meta:
-        verbose_name = _('Company')
-        verbose_name_plural = _('Companies')
+        verbose_name = _('company')
+        verbose_name_plural = _('companies')
 
 class Profile(User):
     """Profile Model"""
@@ -114,6 +114,6 @@ class Profile(User):
         return ('directory_profile_detail', (self.username,))
 
     class Meta:
-        verbose_name = _('Profile')
-        verbose_name_plural = _('Profiles')
+        verbose_name = _('profile')
+        verbose_name_plural = _('profiles')
         ordering = ('last_name', 'first_name')
