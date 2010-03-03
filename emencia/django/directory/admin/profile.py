@@ -1,4 +1,5 @@
 """Admin for emencia.django.directory Profile"""
+import os
 from datetime import datetime
 
 from django import forms
@@ -11,6 +12,7 @@ from django.http import HttpResponseRedirect
 
 from emencia.django.directory import settings
 from emencia.django.directory.models import Profile
+from emencia.django.directory.settings import MEDIA_URL
 
 class ProfileChangeForm(forms.ModelForm):
     username = forms.RegexField(label=_('Username'), max_length=30, regex=r'^\w+$', required=False,
@@ -46,8 +48,9 @@ class ProfileChangeForm(forms.ModelForm):
 class ProfileAdmin(admin.ModelAdmin):
     form = ProfileChangeForm
     date_hierarchy = 'date_joined'
-    list_display = ('fullname', 'email', 'get_companies', 'country', 'get_sections', 'get_groups',
-                    'is_active', 'is_staff', 'language', 'nature', 'get_categories', 'tags')
+    list_display = ('get_picture', 'fullname', 'email', 'get_companies', 'country',
+                    'get_sections', 'get_groups', 'is_active', 'is_staff',
+                    'language', 'nature', 'get_categories', 'tags')
     list_filter = ('is_active', 'is_staff', 'civility', 'groups', 'language', 'nature',
                    'categories', 'country', 'date_joined', 'visible')
     search_fields = ('first_name', 'last_name', 'email', 'city', 'address_1',
@@ -81,6 +84,15 @@ class ProfileAdmin(admin.ModelAdmin):
     def fullname(self, contact):
         return contact.__unicode__()
     fullname.short_description = _('Full name')
+
+    def get_picture(self, contact):
+        img = 'male.jpg'
+        if contact.civility in [1, 2, 6]:
+            img = 'female.jpg'
+        url = os.path.join(MEDIA_URL, 'img', img)
+        return '<img src="%s" alt="%s" />' % (url, contact.__unicode__())
+    get_picture.short_description = _('Picture')
+    get_picture.allow_tags = True
 
     def get_groups(self, contact):
         return ', '.join([group.name for section in contact.groups.all()])
