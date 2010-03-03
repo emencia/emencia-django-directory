@@ -54,7 +54,7 @@ class ProfileAdmin(admin.ModelAdmin):
                      'address_2', 'postal_code', 'city', 'address_comments', 'tags', 'username',
                      'comments', 'phone', 'mobile', 'fax', 'function', 'reference',)
     filter_horizontal = ['categories', 'groups', 'user_permissions', 'sections', 'companies']
-    fieldsets = ((None, {'fields': ('civility', 'first_name', 'last_name',)}),
+    fieldsets = ((None, {'fields': ('civility', 'first_name', 'last_name', 'picture')}),
                  (_('Contact'), {'fields': ('email', 'phone', 'mobile', 'fax')}),
                  (_('Address'), {'fields': ('address_1', 'address_2', 'postal_code', 'city',
                                             'country', 'address_comments')}),

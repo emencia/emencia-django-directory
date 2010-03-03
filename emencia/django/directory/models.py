@@ -65,6 +65,8 @@ class Profile(User):
     # Civility
     civility = models.IntegerField(_('civility'), choices=CIVILITY_CHOICES,
                                    default=0)
+    picture = models.ImageField(_('picture'), upload_to='profiles',
+                                blank=True)
     # Contact
     phone = models.CharField(_('phone'), max_length=15, blank=True)
     mobile = models.CharField(_('mobile'), max_length=15, blank=True)
