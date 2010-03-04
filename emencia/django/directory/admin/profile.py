@@ -15,33 +15,20 @@ from emencia.django.directory.models import Profile
 from emencia.django.directory.settings import MEDIA_URL
 from emencia.django.directory.settings import SORL_THUMBNAIL_INSTALLED
 
+
 class ProfileChangeForm(forms.ModelForm):
-    username = forms.RegexField(label=_('Username'), max_length=30, regex=r'^\w+$', required=False,
+    username = forms.RegexField(label=_('Username'), max_length=30, regex=r'^[-\w]+$', required=False,
                                 help_text = _('Required. 30 characters or fewer. Alphanumeric characters only (letters, digits and underscores).'),
-                                error_message = _('This value must contain only letters, numbers and underscores.'))
-    first_name = forms.CharField(label=_('First name'), max_length=30, required=True)
-    last_name = forms.CharField(label=_('Last name'), max_length=30, required=True)
-    password = forms.CharField(label=_('Password'), max_length=128, required=False)
-    email = forms.EmailField(label=_('Email'), max_length=75, required=True)
-
-    def clean(self):
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
-
-        if username and not password:
-            self._errors['password'] = ErrorList([_('You must define a password for your username.')])
-        if password and not username:
-            self._errors['username'] = ErrorList([_('You must define an username if you set a password.')])
-        
-        return self.cleaned_data
-
-    def clean_username(self):
-        username = self.cleaned_data['username']
-        try:
-            User.objects.get(username=username)
-        except User.DoesNotExist:
-            return username
-        raise forms.ValidationError(_('A user with that username already exists.'))
+                                error_message = _('This value must contain only letters, numbers and underscores.'),
+                                widget=admin.widgets.AdminTextInputWidget)
+    first_name = forms.CharField(label=_('First name'), max_length=30, required=True,
+                                 widget=admin.widgets.AdminTextInputWidget)
+    last_name = forms.CharField(label=_('Last name'), max_length=30, required=True,
+                                widget=admin.widgets.AdminTextInputWidget)
+    password = forms.CharField(label=_('Password'), max_length=128, required=False,
+                               widget=admin.widgets.AdminTextInputWidget)
+    email = forms.EmailField(label=_('Email'), max_length=75, required=True,
+                             widget=admin.widgets.AdminTextInputWidget)
     
     class Meta:
         model = Profile
@@ -72,6 +59,7 @@ class ProfileAdmin(admin.ModelAdmin):
                  (_('Classification'), {'fields': ('reference', 'nature',
                                                    'categories', 'sections', 'tags')}),
                  (_('Misc.'), {'fields': ('comments', 'visible', 'date_joined')}))
+    prepopulated_fields = {'username': ('last_name', 'first_name', 'reference')}
     actions_on_top = False
     actions_on_bottom = True
     actions = ['make_mailinglist',]
@@ -117,7 +105,7 @@ class ProfileAdmin(admin.ModelAdmin):
     get_companies.short_description = _('Companies')
     
     def save_model(admin, request, profile, form, change):
-        if not profile.password.startswith('sha'):
+        if profile.password and not profile.password.startswith('sha'):
             profile.set_password(profile.password)
         profile.save()                                            
 
