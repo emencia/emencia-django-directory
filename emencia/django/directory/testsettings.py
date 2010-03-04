@@ -2,8 +2,10 @@ import os
 
 DATABASE_ENGINE = 'sqlite3'
 DATABASE_NAME = '/tmp/directory.db'
-INSTALLED_APPS = ['django.contrib.contenttypes',
+INSTALLED_APPS = ['django.contrib.auth',
+                  'django.contrib.contenttypes',
                   'tagging',
+                  'sorl.thumbnail',
                   'emencia.django.countries',
                   'emencia.django.directory',]
 
