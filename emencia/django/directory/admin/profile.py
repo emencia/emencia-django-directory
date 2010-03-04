@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect
 from emencia.django.directory import settings
 from emencia.django.directory.models import Profile
 from emencia.django.directory.settings import MEDIA_URL
+from emencia.django.directory.settings import SORL_THUMBNAIL_INSTALLED
 
 class ProfileChangeForm(forms.ModelForm):
     username = forms.RegexField(label=_('Username'), max_length=30, regex=r'^\w+$', required=False,
@@ -86,10 +87,15 @@ class ProfileAdmin(admin.ModelAdmin):
     fullname.short_description = _('Full name')
 
     def get_picture(self, contact):
-        img = 'male.jpg'
-        if contact.civility in [1, 2, 6]:
-            img = 'female.jpg'
-        url = os.path.join(MEDIA_URL, 'img', img)
+        if SORL_THUMBNAIL_INSTALLED and contact.picture:
+            from sorl.thumbnail.main import DjangoThumbnail
+            thumbnail = DjangoThumbnail(contact.picture, (75, 75))
+            url = thumbnail.absolute_url
+        else:
+            img = 'male.jpg'
+            if contact.civility in [1, 2, 6]:
+                img = 'female.jpg'
+            url = os.path.join(MEDIA_URL, 'img', img)
         return '<img src="%s" alt="%s" />' % (url, contact.__unicode__())
     get_picture.short_description = _('Picture')
     get_picture.allow_tags = True

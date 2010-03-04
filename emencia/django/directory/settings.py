@@ -4,5 +4,6 @@ from django.conf import settings
 MEDIA_URL = getattr(settings, 'DIRECTORY_MEDIA_URL', '/edd/')
 
 EDN_INSTALLED = 'emencia.django.newsletter' in getattr(settings, 'INSTALLED_APPS', [])
+SORL_THUMBNAIL_INSTALLED = 'sorl.thumbnail' in getattr(settings, 'INSTALLED_APPS', [])
 
 
