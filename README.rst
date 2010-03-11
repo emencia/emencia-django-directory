@@ -15,6 +15,8 @@ And emencia.django.directory try to be :
 
 The concept is still not fixed, it will evolve and suggestions are welcome.
 
+.. contents::
+
 Installation
 ============
 
