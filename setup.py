@@ -15,6 +15,7 @@ setup(name='emencia.django.directory',
           'Programming Language :: Python',
           'Topic :: Software Development :: Libraries :: Python Modules',
           'License :: OSI Approved :: BSD License',
+          'Framework :: Django',
           ],
 
       author='Fantomas42',
