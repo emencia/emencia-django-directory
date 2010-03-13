@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emencia.django.directory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-24 10:19+0100\n"
-"PO-Revision-Date: 2010-02-24 10:19+0100\n"
+"POT-Creation-Date: 2010-03-13 12:29+0100\n"
+"PO-Revision-Date: 2010-03-13 12:29+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: fr <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -35,12 +35,12 @@ msgid "category"
 msgstr "catégorie"
 
 #: models.py:30
-#: models.py:97
+#: models.py:99
 msgid "categories"
 msgstr "catégories"
 
 #: models.py:36
-#: models.py:95
+#: models.py:97
 msgid "nature"
 msgstr "nature"
 
@@ -53,7 +53,7 @@ msgid "section"
 msgstr "section"
 
 #: models.py:44
-#: models.py:98
+#: models.py:100
 msgid "sections"
 msgstr "sections"
 
@@ -62,7 +62,7 @@ msgid "company"
 msgstr "société"
 
 #: models.py:51
-#: models.py:89
+#: models.py:91
 msgid "companies"
 msgstr "sociétés"
 
@@ -102,200 +102,205 @@ msgstr "Messieurs"
 msgid "civility"
 msgstr "civilité"
 
-#: models.py:69
+#: models.py:68
+msgid "picture"
+msgstr "photo"
+
+#: models.py:71
 msgid "phone"
 msgstr "téléphone"
 
-#: models.py:70
+#: models.py:72
 msgid "mobile"
 msgstr "mobile"
 
-#: models.py:71
+#: models.py:73
 msgid "fax"
 msgstr "fax"
 
-#: models.py:74
+#: models.py:76
 msgid "address 1"
 msgstr "adresse 1"
 
-#: models.py:75
+#: models.py:77
 msgid "address 2"
 msgstr "adresse 2"
 
-#: models.py:76
+#: models.py:78
 msgid "address comments"
 msgstr "commentaires sur l'adresse"
 
-#: models.py:77
+#: models.py:79
 msgid "postal code"
 msgstr "code postal"
 
-#: models.py:78
+#: models.py:80
 msgid "city"
 msgstr "ville"
 
-#: models.py:79
+#: models.py:81
 msgid "country"
 msgstr "pays"
 
-#: models.py:80
+#: models.py:82
 msgid "latitude"
 msgstr "latitude"
 
-#: models.py:81
+#: models.py:83
 msgid "longitude"
 msgstr "longitude"
 
-#: models.py:84
+#: models.py:86
 msgid "language"
 msgstr "langage"
 
-#: models.py:87
+#: models.py:89
 msgid "birthdate"
 msgstr "date de naissance"
 
-#: models.py:87
+#: models.py:89
 msgid "yyyy-mm-dd format"
 msgstr "au format aaaa-mm-dd"
 
-#: models.py:91
+#: models.py:93
 msgid "function"
 msgstr "fonction"
 
-#: models.py:94
+#: models.py:96
 msgid "reference"
 msgstr "réference interne"
 
-#: models.py:99
+#: models.py:101
 msgid "tags"
 msgstr "tags"
 
-#: models.py:100
+#: models.py:102
 msgid "comments"
 msgstr "commentaires"
 
-#: models.py:103
+#: models.py:105
 msgid "modification date"
 msgstr "date de modification"
 
-#: models.py:104
+#: models.py:106
 msgid "visible"
 msgstr "visible au public"
 
-#: models.py:117
+#: models.py:119
 msgid "profile"
 msgstr "profil"
 
-#: models.py:118
+#: models.py:120
 msgid "profiles"
 msgstr "profils"
 
-#: admin/profile.py:16
+#: admin/profile.py:22
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: admin/profile.py:17
+#: admin/profile.py:23
 msgid "Required. 30 characters or fewer. Alphanumeric characters only (letters, digits and underscores)."
 msgstr "Requis. 30 caractères maximum, alphanumériques uniquement (lettres, chiffres, et tirets bas _)."
 
-#: admin/profile.py:18
+#: admin/profile.py:24
 msgid "This value must contain only letters, numbers and underscores."
 msgstr "Ce champ ne doit contenir que des lettres, des nombres et des tirets bas _."
 
-#: admin/profile.py:19
+#: admin/profile.py:26
 msgid "First name"
 msgstr "Prénom"
 
-#: admin/profile.py:20
+#: admin/profile.py:28
 msgid "Last name"
 msgstr "Nom"
 
-#: admin/profile.py:21
+#: admin/profile.py:30
 msgid "Password"
 msgstr "Mot de passe"
 
-#: admin/profile.py:22
+#: admin/profile.py:32
 msgid "Email"
 msgstr "E-mail"
 
-#: admin/profile.py:29
-msgid "You must define a password for your username."
-msgstr "Vous devez définir un mot de passe pour votre utilisateur."
-
-#: admin/profile.py:31
-msgid "You must define an username if you set a password."
-msgstr "Vous devez définir un utilisateur si vous définissez un mot de passe."
-
-#: admin/profile.py:41
-msgid "A user with that username already exists."
-msgstr "Un utilisateur avec ce nom existe déjà."
-
-#: admin/profile.py:58
+#: admin/profile.py:51
 msgid "Contact"
 msgstr "Contact"
 
-#: admin/profile.py:59
+#: admin/profile.py:52
 msgid "Address"
 msgstr "Adresse"
 
-#: admin/profile.py:61
+#: admin/profile.py:54
 msgid "Position"
 msgstr "Position"
 
-#: admin/profile.py:63
+#: admin/profile.py:56
 msgid "Personnal"
 msgstr "Infos. personnelles"
 
-#: admin/profile.py:64
+#: admin/profile.py:57
 msgid "User Access"
 msgstr "Accès utilisateur"
 
-#: admin/profile.py:68
+#: admin/profile.py:61
 msgid "Classification"
 msgstr "Classification"
 
-#: admin/profile.py:70
+#: admin/profile.py:63
 msgid "Misc."
 msgstr "Divers"
 
-#: admin/profile.py:83
+#: admin/profile.py:77
 msgid "Full name"
 msgstr "Profil"
 
-#: admin/profile.py:87
+#: admin/profile.py:90
+msgid "Picture"
+msgstr "Photo"
+
+#: admin/profile.py:95
 msgid "Groups"
 msgstr "Groupes"
 
-#: admin/profile.py:91
+#: admin/profile.py:99
 msgid "Categories"
 msgstr "Catégories"
 
-#: admin/profile.py:95
+#: admin/profile.py:103
 msgid "Sections"
 msgstr "Sections"
 
-#: admin/profile.py:99
+#: admin/profile.py:107
 msgid "Companies"
 msgstr "Sociétés"
 
-#: admin/profile.py:119
+#: admin/profile.py:127
 #, python-format
 msgid "New mailinglist at %s"
 msgstr "Liste de diffusion créée à %s"
 
-#: admin/profile.py:120
+#: admin/profile.py:128
 #, python-format
 msgid "New mailing list created from admin/directory %s"
 msgstr "Nouvelle liste de diffusion créée depuis admin/directory à %s"
 
-#: admin/profile.py:126
+#: admin/profile.py:134
 #, python-format
 msgid "%s succesfully created."
 msgstr "%s créé avec succès."
 
-#: admin/profile.py:129
+#: admin/profile.py:137
 msgid "Create a mailing list"
 msgstr "Créer une liste de diffusion"
+
+#: templates/admin/directory/profile/change_list.html:9
+#, python-format
+msgid "Add %(name)s"
+msgstr "Ajouter %(name)s"
+
+#: templates/admin/directory/profile/change_list.html:15
+msgid "Add to a mailing list"
+msgstr "Ajouter à une liste de diffusion"
 
 #: templates/directory/profile_list.html:4
 msgid "Profile list"
@@ -305,6 +310,13 @@ msgstr "Liste des profils"
 msgid "No profiles"
 msgstr "Pas de profils"
 
+#~ msgid "You must define a password for your username."
+#~ msgstr "Vous devez définir un mot de passe pour votre utilisateur."
+#~ msgid "You must define an username if you set a password."
+#~ msgstr ""
+#~ "Vous devez définir un utilisateur si vous définissez un mot de passe."
+#~ msgid "A user with that username already exists."
+#~ msgstr "Un utilisateur avec ce nom existe déjà."
 #~ msgid "Nature"
 #~ msgstr "Nature"
 #~ msgid "Natures"

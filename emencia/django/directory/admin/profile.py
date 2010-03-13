@@ -5,10 +5,12 @@ from datetime import datetime
 from django import forms
 from django.forms.util import ErrorList
 from django.contrib import admin
+from django.conf.urls.defaults import *
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect
+from django.contrib.admin.views.main import ChangeList
 
 from emencia.django.directory import settings
 from emencia.django.directory.models import Profile
@@ -62,12 +64,12 @@ class ProfileAdmin(admin.ModelAdmin):
     prepopulated_fields = {'username': ('last_name', 'first_name', 'reference')}
     actions_on_top = False
     actions_on_bottom = True
-    actions = ['make_mailinglist',]
+    actions = ['create_mailinglist',]
 
     def get_actions(self, request):
         actions = super(ProfileAdmin, self).get_actions(request)
         if not settings.EDN_INSTALLED:
-            del actions['make_mailinglist']
+            del actions['create_mailinglist']
         return actions
 
     def fullname(self, contact):
@@ -109,7 +111,7 @@ class ProfileAdmin(admin.ModelAdmin):
             profile.set_password(profile.password)
         profile.save()                                            
 
-    def make_mailinglist(self, request, queryset):
+    def create_mailinglist(self, request, queryset):
         """Create a mailing list from the profile list"""
         from emencia.django.newsletter.models import Contact
         from emencia.django.newsletter.models import MailingList
@@ -132,6 +134,26 @@ class ProfileAdmin(admin.ModelAdmin):
         self.message_user(request, _('%s succesfully created.') % new_mailing)
         return HttpResponseRedirect(reverse('admin:newsletter_mailinglist_change',
                                             args=[new_mailing.pk,]))
-    make_mailinglist.short_description = _('Create a mailing list')
+    create_mailinglist.short_description = _('Create a mailing list')
 
+    def filtered_request_queryset(self, request):
+        """Return queryset filtered by the admin list view"""
+        cl = ChangeList(request, self.model, self.list_display,
+                        self.list_display_links, self.list_filter,
+                        self.date_hierarchy, self.search_fields,
+                        self.list_select_related, self.list_per_page,
+                        self.list_editable, self)
+        return cl.get_query_set()
+
+    def creation_mailinglist(self, request):
+        """Create a mailing list form the filtered contacts"""
+        return self.create_mailinglist(request, self.filtered_request_queryset(request))
+
+    def get_urls(self):
+        urls = super(ProfileAdmin, self).get_urls()
+        my_urls = patterns('',
+                           url(r'^create_mailinglist/$', self.creation_mailinglist,
+                               name='directory_profile_create_mailinglist'),
+                           )
+        return my_urls + urls
 
