@@ -96,8 +96,10 @@ class Profile(User):
     reference = models.CharField(_('reference'), max_length=255, blank=True)
     nature = models.ForeignKey(Nature, verbose_name=_('nature'),
                                null=True, blank=True)
-    categories = models.ManyToManyField(Category, verbose_name=_('categories'))
-    sections = models.ManyToManyField(Section, verbose_name=_('sections'))
+    categories = models.ManyToManyField(Category, verbose_name=_('categories'),
+                                        null=True, blank=True)
+    sections = models.ManyToManyField(Section, verbose_name=_('sections'),
+                                      null=True, blank=True)
     tags = TagField(_('tags'), blank=True)
     comments = models.TextField(_('comments'), blank=True)
 
