@@ -7,6 +7,7 @@ emencia.django.directory.egg-info/*
 lib/*
 include/*
 bin/*
+dist/*
 eggs/*
 parts/*
 develop-eggs/*
