@@ -60,7 +60,10 @@ class Profile(User):
                         (4, _('mlle, mr')),
                         (5, _('mme, mr')),
                         (6, _('mmes')),
-                        (7, _('mrs')),)
+                        (7, _('mrs')),
+                        (8, _('company')),
+                        (9, _('doctor')),
+                        )
 
     # Civility
     civility = models.IntegerField(_('civility'), choices=CIVILITY_CHOICES,
