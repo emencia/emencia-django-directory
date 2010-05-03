@@ -55,17 +55,17 @@ def convert_bool(value, valid='oui'):
 
 def convert_country(value):
     """Convert string to a Country object"""
-    if not value:
-        return Country.objects.get(iso='FR')
-    # WARNING
-    #return Country.objects.get(iso=value)
     try:
         return Country.objects.get(iso=value[:2])
     except:
-        return Country.objects.get(iso='FR')
+        return Country.objects.get_or_create(iso='UN', defaults={
+            'name': 'UNKNOW',
+            'printable_name': 'Unknow'})[0]
 
 def convert_abstract(value, model):
     """Convert string to a abstracted model"""
+    if not value:
+        return [model.objects.get_or_create(name='N/C', slug='n-c')[0]]
     return [model.objects.get_or_create(name=abstract,
                                         slug=slugify(abstract))[0]
             for abstract in value.split(',')]
@@ -101,3 +101,8 @@ def get_username(attrs):
         return username
     else:
         return generate_username(attrs, str(profiles.count() + 1))
+
+def format_name(name):
+    names = name.split('-')
+    return '-'.join([name.capitalize() for name in names])
+    

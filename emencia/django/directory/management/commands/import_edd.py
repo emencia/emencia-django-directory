@@ -61,6 +61,7 @@ class Command(LabelCommand):
 
         if not data['first_name']:
             data['first_name'] = ''
+        data['first_name'] = format_name(data['first_name'])
             
         if not data['last_name']:
             data['last_name'] = ''
