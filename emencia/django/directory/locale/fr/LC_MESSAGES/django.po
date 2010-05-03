@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emencia.django.directory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-03 15:38+0200\n"
-"PO-Revision-Date: 2010-05-03 15:38+0100\n"
+"POT-Creation-Date: 2010-05-03 16:29+0200\n"
+"PO-Revision-Date: 2010-05-03 16:31+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: fr <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: models.py:15
+#: models.py:130
 msgid "name"
 msgstr "nom"
 
@@ -36,6 +37,7 @@ msgstr "catégorie"
 
 #: models.py:30
 #: models.py:102
+#: models.py:134
 msgid "categories"
 msgstr "catégories"
 
@@ -45,6 +47,7 @@ msgid "nature"
 msgstr "nature"
 
 #: models.py:37
+#: models.py:136
 msgid "natures"
 msgstr "natures"
 
@@ -54,6 +57,7 @@ msgstr "section"
 
 #: models.py:44
 #: models.py:104
+#: models.py:138
 msgid "sections"
 msgstr "sections"
 
@@ -64,6 +68,7 @@ msgstr "société"
 
 #: models.py:51
 #: models.py:94
+#: models.py:140
 msgid "companies"
 msgstr "sociétés"
 
@@ -196,8 +201,21 @@ msgid "profile"
 msgstr "profil"
 
 #: models.py:125
+#: models.py:142
 msgid "profiles"
 msgstr "profils"
+
+#: models.py:131
+msgid "permissions group"
+msgstr "groupe de permissions"
+
+#: models.py:149
+msgid "workgroup"
+msgstr "groupe de travail"
+
+#: models.py:150
+msgid "workgroups"
+msgstr "groupes de travail"
 
 #: admin/profile.py:22
 msgid "Username"
@@ -298,6 +316,26 @@ msgstr "%s créé avec succès."
 msgid "Create a mailing list"
 msgstr "Créer une liste de diffusion"
 
+#: admin/workgroup.py:23
+msgid "Profiles length"
+msgstr "Nombre de profiles"
+
+#: admin/workgroup.py:27
+msgid "Companies length"
+msgstr "Nombre de sociétés"
+
+#: admin/workgroup.py:31
+msgid "Categories length"
+msgstr "Nombre de catégories"
+
+#: admin/workgroup.py:35
+msgid "Natures length"
+msgstr "Nombre de natures"
+
+#: admin/workgroup.py:39
+msgid "Sections length"
+msgstr "Nombre de sections"
+
 #: templates/admin/directory/profile/change_list.html:9
 #, python-format
 msgid "Add %(name)s"
@@ -324,16 +362,12 @@ msgstr "Pas de profils"
 #~ msgstr "Un utilisateur avec ce nom existe déjà."
 #~ msgid "Nature"
 #~ msgstr "Nature"
-#~ msgid "Natures"
-#~ msgstr "Natures"
 #~ msgid "Section"
 #~ msgstr "Section"
 #~ msgid "Company"
 #~ msgstr "Société"
 #~ msgid "creation date"
 #~ msgstr "date de création"
-#~ msgid "groups"
-#~ msgstr "groupes"
 #~ msgid "Country"
 #~ msgstr "Pays"
 
