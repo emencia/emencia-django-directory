@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emencia.django.directory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-13 12:29+0100\n"
-"PO-Revision-Date: 2010-03-13 12:29+0100\n"
+"POT-Creation-Date: 2010-05-03 15:38+0200\n"
+"PO-Revision-Date: 2010-05-03 15:38+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: fr <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -35,12 +35,12 @@ msgid "category"
 msgstr "catégorie"
 
 #: models.py:30
-#: models.py:99
+#: models.py:102
 msgid "categories"
 msgstr "catégories"
 
 #: models.py:36
-#: models.py:97
+#: models.py:100
 msgid "nature"
 msgstr "nature"
 
@@ -53,16 +53,17 @@ msgid "section"
 msgstr "section"
 
 #: models.py:44
-#: models.py:100
+#: models.py:104
 msgid "sections"
 msgstr "sections"
 
 #: models.py:50
+#: models.py:64
 msgid "company"
 msgstr "société"
 
 #: models.py:51
-#: models.py:91
+#: models.py:94
 msgid "companies"
 msgstr "sociétés"
 
@@ -98,99 +99,103 @@ msgstr "Mesdames"
 msgid "mrs"
 msgstr "Messieurs"
 
-#: models.py:66
+#: models.py:65
+msgid "doctor"
+msgstr "Docteur"
+
+#: models.py:69
 msgid "civility"
 msgstr "civilité"
 
-#: models.py:68
+#: models.py:71
 msgid "picture"
 msgstr "photo"
 
-#: models.py:71
+#: models.py:74
 msgid "phone"
 msgstr "téléphone"
 
-#: models.py:72
+#: models.py:75
 msgid "mobile"
 msgstr "mobile"
 
-#: models.py:73
+#: models.py:76
 msgid "fax"
 msgstr "fax"
 
-#: models.py:76
+#: models.py:79
 msgid "address 1"
 msgstr "adresse 1"
 
-#: models.py:77
+#: models.py:80
 msgid "address 2"
 msgstr "adresse 2"
 
-#: models.py:78
+#: models.py:81
 msgid "address comments"
 msgstr "commentaires sur l'adresse"
 
-#: models.py:79
+#: models.py:82
 msgid "postal code"
 msgstr "code postal"
 
-#: models.py:80
+#: models.py:83
 msgid "city"
 msgstr "ville"
 
-#: models.py:81
+#: models.py:84
 msgid "country"
 msgstr "pays"
 
-#: models.py:82
+#: models.py:85
 msgid "latitude"
 msgstr "latitude"
 
-#: models.py:83
+#: models.py:86
 msgid "longitude"
 msgstr "longitude"
 
-#: models.py:86
+#: models.py:89
 msgid "language"
 msgstr "langage"
 
-#: models.py:89
+#: models.py:92
 msgid "birthdate"
 msgstr "date de naissance"
 
-#: models.py:89
+#: models.py:92
 msgid "yyyy-mm-dd format"
 msgstr "au format aaaa-mm-dd"
 
-#: models.py:93
+#: models.py:96
 msgid "function"
 msgstr "fonction"
 
-#: models.py:96
+#: models.py:99
 msgid "reference"
 msgstr "réference interne"
 
-#: models.py:101
+#: models.py:106
 msgid "tags"
 msgstr "tags"
 
-#: models.py:102
+#: models.py:107
 msgid "comments"
 msgstr "commentaires"
 
-#: models.py:105
+#: models.py:110
 msgid "modification date"
 msgstr "date de modification"
 
-#: models.py:106
+#: models.py:111
 msgid "visible"
 msgstr "visible au public"
 
-#: models.py:119
+#: models.py:124
 msgid "profile"
 msgstr "profil"
 
-#: models.py:120
+#: models.py:125
 msgid "profiles"
 msgstr "profils"
 
