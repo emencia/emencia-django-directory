@@ -70,10 +70,15 @@ def convert_abstract(value, model):
                                         slug=slugify(abstract))[0]
             for abstract in value.split(',')]
 
-CIVILITY_REVERSE = {'unknown': 0, 'mlle': 1,
-                    'mme': 2, 'mr': 3, 'mlle, mr': 4,
-                    'mme, mr': 5, 'mmes': 6, 'mrs': 7,
-                    'ste': 0}
+CIVILITY_REVERSE = {'unknown': 0, 'inconnu': 0,
+                    'mlle': 1, 'mle': 1, 'melle': 1,
+                    'mme': 2, 'madame': 2,
+                    'mr': 3, 'm.': 3, 'm': 3,
+                    'monsieur': 3, 'mmr': 3,
+                    'mlle, mr': 4, 'mle,mr': 4,
+                    'mme, mr': 5, 'mr, mme': 5, 'mme,mr': 5,
+                    'mmes': 6, 'mrs': 7,
+                    'ste': 8, 'docteur': 9}
 
 def convert_civility(value):
     """Convert string to civility"""

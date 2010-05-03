@@ -28,6 +28,7 @@ class Command(LabelCommand):
     help = 'Import profiles to emencia.django.directory from a csv file'
 
     def handle_label(self, filename, **options):
+        verbosity = int(options['verbosity'])
         print '* Launching import of directory'
 
         init_dbengine()
@@ -44,7 +45,8 @@ class Command(LabelCommand):
                 profile.categories.add(*attr['categories'])
                 profile.companies.add(*attr['companies'])
 
-                print '- %s created' % profile.__unicode__()
+                if verbosity:
+                    print '- %s created' % profile.__unicode__()
                 PROFILE_CACHE.add(attr['username'])
 
     def clean_profile(self, data):
@@ -55,7 +57,7 @@ class Command(LabelCommand):
         return cleaned_data
 
     def format(self, data):
-        data['civility'] = convert_civility(data['civility'])
+        data['civility'] = convert_civility(data['civility'].lower())
 
         if not data['first_name']:
             data['first_name'] = ''
@@ -65,9 +67,6 @@ class Command(LabelCommand):
 
         if not data['username']:
             data['username'] = get_username(data)
-            #slugify('%s %s %s' % (data['last_name'],
-            #data['first_name'],
-            #data['reference']))
 
         data['visible'] = convert_bool(data['visible'])
         data['is_active'] = convert_bool(data['is_active'])
