@@ -121,7 +121,7 @@ class ProgressLine(object):
         self.row += 1
 
         elapsed_time = datetime.now() - self.start_time        
-        remaining_time = timedelta(seconds=((self.rows * elapsed_time.seconds) / self.row) - elapsed_time.seconds)
+        remaining_time = timedelta(seconds=int(float(self.rows * elapsed_time.seconds) / self.row) - elapsed_time.seconds)
         percent_done = (float(self.row) / float(self.rows)) * 100
         
         sys.stdout.write('\rScanning entry %i/%i, %s elapsed, %s remaining => %.5f%%' %
