@@ -1,4 +1,7 @@
 """Utils for import_edd"""
+import sys
+from datetime import datetime, timedelta
+
 from django.conf import settings
 from django.db import connection
 from django.template.defaultfilters import slugify
@@ -105,4 +108,28 @@ def get_username(attrs):
 def format_name(name):
     names = name.split('-')
     return '-'.join([name.capitalize() for name in names])
+    
+class ProgressLine(object):
+    """Object for making progress line status"""
+
+    def __init__(self, rows):
+        self.row = 0
+        self.rows = rows
+        self.start_time = datetime.now()
+
+    def top(self):
+        self.row += 1
+
+        elapsed_time = datetime.now() - self.start_time        
+        remaining_time = timedelta(seconds=((self.rows * elapsed_time.seconds) / self.row) - elapsed_time.seconds)
+        percent_done = (float(self.row) / float(self.rows)) * 100
+        
+        sys.stdout.write('\rScanning entry %i/%i, %s elapsed, %s remaining => %.5f%%' %
+                         (self.row, self.rows,
+                          str(elapsed_time).split('.')[0],
+                          str(remaining_time).split('.')[0],
+                          percent_done))
+        sys.stdout.flush()
+                      
+
     

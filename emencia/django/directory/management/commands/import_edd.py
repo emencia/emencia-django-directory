@@ -35,6 +35,7 @@ class Command(LabelCommand):
         PROFILE_CACHE = init_cache()
         data_lines = init_data(filename)
 
+        progress = ProgressLine(len(data_lines))
         for line in data_lines:
             attr = self.format(extract_values(line, COLUMNS))
             if attr['username'] not in PROFILE_CACHE:
@@ -46,8 +47,10 @@ class Command(LabelCommand):
                 profile.companies.add(*attr['companies'])
 
                 if verbosity:
-                    print '- %s created' % profile.__unicode__()
+                    progress.top()
                 PROFILE_CACHE.add(attr['username'])
+        if verbosity:
+            print '\n* End of importation'
 
     def clean_profile(self, data):
         cleaned_data = data.copy()
