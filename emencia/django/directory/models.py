@@ -124,3 +124,30 @@ class Profile(User):
         verbose_name = _('profile')
         verbose_name_plural = _('profiles')
         ordering = ('last_name', 'first_name')
+
+class WorkGroup(models.Model):
+    """WorkGroup Model"""
+    name = models.CharField(_('name'), max_length=255)
+    group = models.ForeignKey(Group, verbose_name=_('permissions group'),
+                              related_name='directory_workgroup_group')
+
+    categories = models.ManyToManyField(Category, verbose_name=_('categories'),
+                                        blank=True, null=True)
+    natures = models.ManyToManyField(Nature, verbose_name=_('natures'),
+                                     blank=True, null=True)
+    sections = models.ManyToManyField(Section, verbose_name=_('sections'),
+                                      blank=True, null=True)
+    companies = models.ManyToManyField(Company, verbose_name=_('companies'),
+                                       blank=True, null=True)
+    profiles = models.ManyToManyField(Profile, verbose_name=_('profiles'),
+                                      blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('workgroup')
+        verbose_name_plural = _('workgroups')
+
+    
+
