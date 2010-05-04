@@ -16,6 +16,8 @@ from emencia.django.directory import settings
 from emencia.django.directory.models import Profile
 from emencia.django.directory.settings import MEDIA_URL
 from emencia.django.directory.settings import SORL_THUMBNAIL_INSTALLED
+from emencia.django.directory.workgroups import request_workgroups
+from emencia.django.directory.workgroups import request_workgroups_profiles_pk
 
 
 class ProfileChangeForm(forms.ModelForm):
@@ -31,7 +33,7 @@ class ProfileChangeForm(forms.ModelForm):
                                widget=admin.widgets.AdminTextInputWidget)
     email = forms.EmailField(label=_('Email'), max_length=75, required=True,
                              widget=admin.widgets.AdminTextInputWidget)
-    
+
     class Meta:
         model = Profile
 
@@ -105,11 +107,23 @@ class ProfileAdmin(admin.ModelAdmin):
     def get_companies(self, contact):
         return ', '.join([company.name for company in contact.companies.all()])
     get_companies.short_description = _('Companies')
-    
+
+    def queryset(self, request):
+        queryset = super(ProfileAdmin, self).queryset(request)
+        if not request.user.is_superuser:
+            profiles_pk = request_workgroups_profiles_pk(request)
+            queryset = queryset.filter(pk__in=profiles_pk)
+        return queryset
+
     def save_model(admin, request, profile, form, change):
+        workgroups = []
+        if not profile.pk and not request.user.is_superuser:
+            workgroups = request_workgroups(request)
         if profile.password and not profile.password.startswith('sha'):
             profile.set_password(profile.password)
-        profile.save()                                            
+        profile.save()
+        for workgroup in workgroups:
+            workgroup.profiles.add(profile)
 
     def create_mailinglist(self, request, queryset):
         """Create a mailing list from the profile list"""
@@ -130,7 +144,7 @@ class ProfileAdmin(admin.ModelAdmin):
         for subscriber in subscribers:
             new_mailing.subscribers.add(subscriber)
         new_mailing.save()
-        
+
         self.message_user(request, _('%s succesfully created.') % new_mailing)
         return HttpResponseRedirect(reverse('admin:newsletter_mailinglist_change',
                                             args=[new_mailing.pk,]))
