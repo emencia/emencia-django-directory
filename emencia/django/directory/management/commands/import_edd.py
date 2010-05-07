@@ -8,6 +8,7 @@ from emencia.django.directory.models import Profile
 from emencia.django.directory.models import Category
 from emencia.django.directory.models import Section
 from emencia.django.directory.models import Company
+from emencia.django.directory.models import WorkGroup
 
 from utils import *
 
@@ -19,7 +20,7 @@ COLUMNS = ['civility', 'last_name', 'first_name',
            'lat', 'lng', 'reference', 'function',
            'companies', 'language', 'birthdate',
            'nature', 'categories', 'sections', 'tags',
-           'comments']
+           'workgroups', 'comments']
 
 class Command(LabelCommand):
     """Command of injection"""
@@ -46,9 +47,11 @@ class Command(LabelCommand):
                 profile.categories.add(*attr['categories'])
                 profile.companies.add(*attr['companies'])
 
-                if verbosity:
-                    progress.top()
                 PROFILE_CACHE.add(attr['username'])
+                for workgroup in attr['workgroups']:
+                    workgroup.profiles.add(profile)
+            if verbosity:
+                progress.top()
         if verbosity:
             print '\n* End of importation'
 
@@ -57,6 +60,7 @@ class Command(LabelCommand):
         del cleaned_data['sections']
         del cleaned_data['companies']
         del cleaned_data['categories']
+        del cleaned_data['workgroups']
         return cleaned_data
 
     def format(self, data):
@@ -75,10 +79,15 @@ class Command(LabelCommand):
         data['visible'] = convert_bool(data['visible'])
         data['is_active'] = convert_bool(data['is_active'])
 
-        data['companies'] = convert_abstract(data['companies'], Company)
-        data['sections'] = convert_abstract(data['sections'], Section)
-        data['categories'] = convert_abstract(data['categories'], Category)
-        data['nature'] = convert_abstract(data['nature'], Nature)[0]
+        data['workgroups'] = convert_workgroups(data['workgroups'])
+        data['companies'] = convert_abstract(data['companies'], Company,
+                                             data['workgroups'])
+        data['sections'] = convert_abstract(data['sections'], Section,
+                                            data['workgroups'])
+        data['categories'] = convert_abstract(data['categories'], Category,
+                                              data['workgroups'])
+        data['nature'] = convert_abstract(data['nature'], Nature,
+                                          data['workgroups'])[0]
         data['country'] = convert_country(data['country'])
 
         data['birthdate'] = None

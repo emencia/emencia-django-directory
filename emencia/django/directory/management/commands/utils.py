@@ -4,11 +4,14 @@ from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.db import connection
+from django.contrib.auth.models import Group
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 
 from emencia.django.countries.models import Country
 from emencia.django.directory.models import Profile
+from emencia.django.directory.models import WorkGroup
+from emencia.django.directory.admin.abstractcategory import WORKGROUP_RELATIONS
 
 def init_dbengine():
     """Prepare the dbengine"""
@@ -65,13 +68,18 @@ def convert_country(value):
             'name': 'UNKNOW',
             'printable_name': 'Unknow'})[0]
 
-def convert_abstract(value, model):
+def convert_abstract(value, model, workgroups):
     """Convert string to a abstracted model"""
     if not value:
         return [model.objects.get_or_create(name='N/C', slug='n-c')[0]]
-    return [model.objects.get_or_create(name=abstract,
-                                        slug=slugify(abstract))[0]
-            for abstract in value.split(',')]
+    abstracts = [model.objects.get_or_create(name=abstract,
+                                             slug=slugify(abstract))[0]
+                 for abstract in value.split(',')]
+
+    relation = WORKGROUP_RELATIONS[model]
+    for workgroup in workgroups:        
+        getattr(workgroup, relation).add(*abstracts)
+    return abstracts
 
 CIVILITY_REVERSE = {'unknown': 0, 'inconnu': 0,
                     'mlle': 1, 'mle': 1, 'melle': 1,
@@ -90,6 +98,14 @@ def convert_civility(value):
     else:
         return CIVILITY_REVERSE[value]
 
+def convert_workgroups(value):
+    workgroups = []
+    for wg in value.split(','):
+        group, created = Group.objects.get_or_create(name=wg)
+        workgroup, created = WorkGroup.objects.get_or_create(name=wg,
+                                                             group=group)
+        workgroups.append(workgroup)
+    return workgroups
 
 def generate_username(attrs, suffix=''):
     return str(slugify(' '.join([attrs['last_name'], attrs['first_name'], 
