@@ -93,7 +93,7 @@ CIVILITY_REVERSE = {'unknown': 0, 'inconnu': 0,
                     'mr & mrs': 5,
                     'mmes': 6, 'mrs': 7,
                     'ste': 8, 'docteur': 9, 'dr': 9,
-                    'sheik': 3, 'lord': 3}# OSEF les bourges
+                    'sheik': 10, 'lord': 11}
 
 def convert_civility(value):
     """Convert string to civility"""

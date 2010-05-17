@@ -9,6 +9,7 @@ from tagging.fields import TagField
 
 from emencia.django.countries.models import Country
 from emencia.django.directory.managers import ProfileManager
+from emencia.django.directory.settings import CUSTOM_CIVILITIES
 
 class AbstractCategory(models.Model):
     """Abstract Model for categorization"""
@@ -61,9 +62,7 @@ class Profile(User):
                         (5, _('mme, mr')),
                         (6, _('mmes')),
                         (7, _('mrs')),
-                        (8, _('company')),
-                        (9, _('doctor')),
-                        )
+                        ) + CUSTOM_CIVILITIES
 
     # Civility
     civility = models.IntegerField(_('civility'), choices=CIVILITY_CHOICES,
