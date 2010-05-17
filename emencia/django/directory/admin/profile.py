@@ -129,6 +129,9 @@ class ProfileAdmin(admin.ModelAdmin):
         """Create a mailing list from the profile list"""
         from emencia.django.newsletter.models import Contact
         from emencia.django.newsletter.models import MailingList
+        from emencia.django.newsletter.settings import USE_WORKGROUPS
+        from emencia.django.newsletter.utils.workgroups import request_workgroups as edn_request_workgroups
+        
         subscribers = []
         for profile in queryset:
             contact, created = Contact.objects.get_or_create(email=profile.email,
@@ -144,6 +147,11 @@ class ProfileAdmin(admin.ModelAdmin):
         for subscriber in subscribers:
             new_mailing.subscribers.add(subscriber)
         new_mailing.save()
+
+        if USE_WORKGROUPS:
+            for workgroup in  edn_request_workgroups(request):
+                workgroup.contacts.add(*subscribers)
+                workgroup.mailinglists.add(new_mailing)
 
         self.message_user(request, _('%s succesfully created.') % new_mailing)
         return HttpResponseRedirect(reverse('admin:newsletter_mailinglist_change',

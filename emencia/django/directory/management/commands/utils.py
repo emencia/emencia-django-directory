@@ -11,6 +11,7 @@ from django.utils.encoding import smart_unicode
 from emencia.django.countries.models import Country
 from emencia.django.directory.models import Profile
 from emencia.django.directory.models import WorkGroup
+from emencia.django.directory.settings import EDN_INSTALLED
 from emencia.django.directory.admin.abstractcategory import WORKGROUP_RELATIONS
 
 def init_dbengine():
@@ -108,6 +109,12 @@ def convert_workgroups(value):
         group, created = Group.objects.get_or_create(name=wg)
         workgroup, created = WorkGroup.objects.get_or_create(name=wg,
                                                              group=group)
+        if EDN_INSTALLED:
+            from emencia.django.newsletter.settings import USE_WORKGROUPS
+            from emencia.django.newsletter.models import WorkGroup as EDNWorkGroup
+            if USE_WORKGROUPS:
+                EDNWorkGroup.objects.get_or_create(name=wg, group=group)
+            
         workgroups.append(workgroup)
     return workgroups
 
