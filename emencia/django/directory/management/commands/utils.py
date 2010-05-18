@@ -73,8 +73,8 @@ def convert_abstract(value, model, workgroups):
     """Convert string to a abstracted model"""
     if not value:
         return [model.objects.get_or_create(name='N/C', slug='n-c')[0]]
-    abstracts = [model.objects.get_or_create(name=abstract.upper(),
-                                             slug=slugify(abstract.upper()))[0]
+    abstracts = [model.objects.get_or_create(name=abstract.strip().upper(),
+                                             slug=slugify(abstract.strip().upper()))[0]
                  for abstract in value.split(',')]
 
     relation = WORKGROUP_RELATIONS[model]
