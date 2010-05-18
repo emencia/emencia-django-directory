@@ -70,9 +70,9 @@ class Profile(User):
     picture = models.ImageField(_('picture'), upload_to='trombi',
                                 blank=True)
     # Contact
-    phone = models.CharField(_('phone'), max_length=15, blank=True)
-    mobile = models.CharField(_('mobile'), max_length=15, blank=True)
-    fax = models.CharField(_('fax'), max_length=15, blank=True)
+    phone = models.CharField(_('phone'), max_length=40, blank=True)
+    mobile = models.CharField(_('mobile'), max_length=40, blank=True)
+    fax = models.CharField(_('fax'), max_length=40, blank=True)
 
     # Address
     address_1 = models.TextField(_('address 1'), blank=True)
