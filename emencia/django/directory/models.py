@@ -15,7 +15,7 @@ class AbstractCategory(models.Model):
     """Abstract Model for categorization"""
     name = models.CharField(_('name'), max_length=255)
     description = models.TextField(_('description'), blank=True)
-    slug = models.SlugField(_('slug'))
+    slug = models.SlugField(_('slug'), max_length=255)
 
     def __unicode__(self):
         return self.name
