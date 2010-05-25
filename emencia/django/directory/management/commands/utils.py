@@ -66,8 +66,8 @@ def convert_country(value):
         return Country.objects.get(iso=value[:2])
     except:
         return Country.objects.get_or_create(iso='UN', defaults={
-            'name': 'UNKNOW',
-            'printable_name': 'Unknow'})[0]
+            'name': 'UNKNOWN',
+            'printable_name': 'Unknown'})[0]
 
 def convert_abstract(value, model, workgroups):
     """Convert string to a abstracted model"""
