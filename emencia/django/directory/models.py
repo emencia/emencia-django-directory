@@ -105,6 +105,10 @@ class Company(AbstractCategory):
     
     objects = CompanyManager()
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('directory_company_detail', (self.slug,))
+
     class Meta:
         verbose_name = _('company')
         verbose_name_plural = _('companies')
