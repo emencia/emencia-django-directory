@@ -8,6 +8,7 @@ from django.contrib.auth.models import Group
 from tagging.fields import TagField
 
 from emencia.django.countries.models import Country
+from emencia.django.directory.managers import CompanyManager
 from emencia.django.directory.managers import ProfileManager
 from emencia.django.directory.settings import CUSTOM_CIVILITIES
 
@@ -15,7 +16,8 @@ class AbstractCategory(models.Model):
     """Abstract Model for categorization"""
     name = models.CharField(_('name'), max_length=255)
     description = models.TextField(_('description'), blank=True)
-    slug = models.SlugField(_('slug'), max_length=255)
+    slug = models.SlugField(_('slug'), max_length=255,
+                            unique=True)
 
     def __unicode__(self):
         return self.name
@@ -44,8 +46,64 @@ class Section(AbstractCategory):
         verbose_name = _('section')
         verbose_name_plural = _('sections')
 
+class FieldOfCompetence(AbstractCategory):
+    """Field of competence Model"""
+
+    class Meta:
+        verbose_name = _('field of competence')
+        verbose_name_plural = _('fields of competences')
+
+class Competence(AbstractCategory):
+    """Competence Model"""
+    field_of_competence = models.ForeignKey(FieldOfCompetence,
+                                            verbose_name=_('field of competence'))
+    
+    class Meta:
+        verbose_name = _('competence')
+        verbose_name_plural = _('competences')
+
+
 class Company(AbstractCategory):
     """Company Model"""
+    picture = models.ImageField(_('logo'), upload_to='logos',
+                                blank=True, null=True)
+    description_additional = models.TextField(_('additional description'),
+                                              blank=True)
+    
+    # Contact
+    phone = models.CharField(_('phone'), max_length=40, blank=True)
+    fax = models.CharField(_('fax'), max_length=40, blank=True)
+    email = models.EmailField(_('e-mail address'), blank=True)
+    website = models.CharField(_('website'), max_length=255,
+                               blank=True)
+
+    # Address
+    address_1 = models.TextField(_('address 1'), blank=True)
+    address_2 = models.TextField(_('address 2'), blank=True)
+    address_comments = models.TextField(_('address comments'), blank=True)
+    postal_code = models.CharField(_('postal code'), max_length=20, blank=True)
+    city = models.CharField(_('city'), max_length=255, blank=True)
+    country = models.ForeignKey(Country, verbose_name=_('country'))
+    lat = models.CharField(_('latitude'), max_length=30, blank=True)
+    lng = models.CharField(_('longitude'), max_length=30, blank=True)    
+
+    # Internal classification
+    reference = models.CharField(_('reference'), max_length=255, blank=True)    
+    nature = models.ForeignKey(Nature, verbose_name=_('nature'),
+                               null=True, blank=True)
+    categories = models.ManyToManyField(Category, verbose_name=_('categories'),
+                                        null=True, blank=True)
+    sections = models.ManyToManyField(Section, verbose_name=_('sections'),
+                                      null=True, blank=True)
+    tags = TagField(_('tags'), blank=True)
+    comments = models.TextField(_('comments'), blank=True)
+
+    # Meta Data
+    creation_date = models.DateTimeField(_('creation date'), auto_now_add=True)
+    modification_date = models.DateTimeField(_('modification date'), auto_now=True)
+    visible = models.BooleanField(_('visible'), default=True)
+    
+    objects = CompanyManager()
 
     class Meta:
         verbose_name = _('company')
@@ -68,11 +126,15 @@ class Profile(User):
     civility = models.IntegerField(_('civility'), choices=CIVILITY_CHOICES,
                                    default=0)
     picture = models.ImageField(_('picture'), upload_to='trombi',
-                                blank=True)
+                                blank=True, null=True)
     # Contact
     phone = models.CharField(_('phone'), max_length=40, blank=True)
     mobile = models.CharField(_('mobile'), max_length=40, blank=True)
     fax = models.CharField(_('fax'), max_length=40, blank=True)
+    email_alternative = models.EmailField(_('alternative e-mail address'),
+                                          blank=True)
+    website = models.CharField(_('website'), max_length=255,
+                               blank=True)
 
     # Address
     address_1 = models.TextField(_('address 1'), blank=True)
@@ -93,6 +155,8 @@ class Profile(User):
     companies = models.ManyToManyField(Company, verbose_name=_('companies'),
                                        null=True, blank=True)
     function = models.CharField(_('function'), max_length=255, blank=True)
+    competences = models.ManyToManyField(Competence, verbose_name=_('competences'),
+                                         null=True, blank=True)
 
     # Internal classification
     reference = models.CharField(_('reference'), max_length=255, blank=True)

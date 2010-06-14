@@ -44,18 +44,21 @@ class ProfileAdmin(admin.ModelAdmin):
                     'get_sections', 'get_groups', 'is_active', 'is_staff',
                     'language', 'nature', 'get_categories', 'tags')
     list_filter = ('is_active', 'is_staff', 'civility', 'groups', 'language', 'nature',
-                   'categories', 'country', 'date_joined', 'visible')
+                   'categories', 'sections', 'country', 'date_joined', 'visible')
     search_fields = ('first_name', 'last_name', 'email', 'city', 'address_1',
                      'address_2', 'postal_code', 'city', 'address_comments', 'tags', 'username',
                      'comments', 'phone', 'mobile', 'fax', 'function', 'reference',)
-    filter_horizontal = ['categories', 'groups', 'user_permissions', 'sections', 'companies']
+    filter_horizontal = ['categories', 'groups', 'user_permissions',
+                         'sections', 'companies', 'competences']
     fieldsets = ((None, {'fields': ('civility', 'first_name', 'last_name', 'picture')}),
-                 (_('Contact'), {'fields': ('email', 'phone', 'mobile', 'fax')}),
+                 (_('Contact'), {'fields': ('email', 'email_alternative',
+                                            'phone', 'mobile', 'fax', 'website',)}),
                  (_('Address'), {'fields': ('address_1', 'address_2', 'postal_code', 'city',
                                             'country', 'address_comments')}),
                  (_('Position'), {'fields': ('lat', 'lng'),
                                   'classes': ('collapse',),}),
-                 (_('Personnal'), {'fields': ('language', 'birthdate', 'companies', 'function',)}),
+                 (_('Personnal'), {'fields': ('language', 'birthdate', 'companies', 'function',
+                                              'competences')}),
                  (_('User Access'), {'fields': ('username', 'password', 'is_active',
                                                 'is_staff', 'is_superuser', 'last_login',
                                                 'user_permissions', 'groups'),

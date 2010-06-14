@@ -18,6 +18,7 @@ WORKGROUP_RELATIONS = {Category: 'categories',
 
 class AbstractCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
+    search_fields = ('name', 'slug', 'description')
     fieldsets = ((None, {'fields': ('name', 'description')}),
                  (None, {'fields': ('slug',)}),)
     prepopulated_fields = {'slug': ('name',)}

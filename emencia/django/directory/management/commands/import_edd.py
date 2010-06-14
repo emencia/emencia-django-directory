@@ -90,6 +90,7 @@ class Command(LabelCommand):
                                           data['workgroups'])[0]
         data['country'] = convert_country(data['country'])
 
+        # TODO
         data['birthdate'] = None
         data['language'] = data['language'].lower()#'fr'
 
