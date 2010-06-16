@@ -6,7 +6,7 @@ class ProfileBackend:
 
     def authenticate(self, username=None, password=None):
         try:
-            profile = self.model.objects.get(username=username, is_activate=True)
+            profile = Profile.objects.get(username=username, is_active=True)
             if profile.check_password(password):
                 return profile
         except Profile.DoesNotExist:
