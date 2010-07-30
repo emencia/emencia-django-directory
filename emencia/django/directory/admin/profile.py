@@ -96,7 +96,7 @@ class ProfileAdmin(admin.ModelAdmin):
     get_picture.allow_tags = True
 
     def get_groups(self, contact):
-        return ', '.join([group.name for section in contact.groups.all()])
+        return ', '.join([group.name for group in contact.groups.all()])
     get_groups.short_description = _('Groups')
 
     def get_categories(self, contact):
