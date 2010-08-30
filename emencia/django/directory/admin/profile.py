@@ -15,6 +15,7 @@ from django.contrib.admin.views.main import ChangeList
 from emencia.django.directory import settings
 from emencia.django.directory.models import Profile
 from emencia.django.directory.settings import MEDIA_URL
+from emencia.django.directory.settings import USE_WORKGROUPS
 from emencia.django.directory.settings import SORL_THUMBNAIL_INSTALLED
 from emencia.django.directory.workgroups import request_workgroups
 from emencia.django.directory.workgroups import request_workgroups_profiles_pk
@@ -113,7 +114,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         queryset = super(ProfileAdmin, self).queryset(request)
-        if not request.user.is_superuser:
+        if not request.user.is_superuser and USE_WORKGROUPS:
             profiles_pk = request_workgroups_profiles_pk(request)
             queryset = queryset.filter(pk__in=profiles_pk)
         return queryset
