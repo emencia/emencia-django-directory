@@ -7,6 +7,7 @@ from emencia.django.directory.models import Nature
 from emencia.django.directory.models import Section
 from emencia.django.directory.models import Company
 from emencia.django.directory.models import Profile
+from emencia.django.directory.settings import USE_WORKGROUPS
 from emencia.django.directory.workgroups import request_workgroups
 from emencia.django.directory.workgroups import request_workgroups_abstract_categories_pk
 
@@ -27,12 +28,12 @@ class AbstractCategoryAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         queryset = super(AbstractCategoryAdmin, self).queryset(request)
-        if not request.user.is_superuser:            
+        if not request.user.is_superuser and USE_WORKGROUPS:
             relation = WORKGROUP_RELATIONS[self.model]
             abstract_categories_pk = request_workgroups_abstract_categories_pk(request, relation)
             queryset = queryset.filter(pk__in=abstract_categories_pk)
         return queryset
-            
+
     def save_model(self, request, abstract_category, form, change):
         workgroups = []
         if not abstract_category.pk and not request.user.is_superuser:
