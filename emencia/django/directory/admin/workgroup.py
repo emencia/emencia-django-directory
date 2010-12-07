@@ -2,8 +2,6 @@
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 
-from emencia.django.newsletter.models import WorkGroup
-
 class WorkGroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'group', 'profiles_length',
                     'companies_length', 'categories_length',
