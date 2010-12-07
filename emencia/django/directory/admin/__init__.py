@@ -1,4 +1,4 @@
-"""Admin for emencia.django.newsletter"""
+"""Admin for emencia.django.directory"""
 from django.contrib import admin
 from django.conf import settings
 
