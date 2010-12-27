@@ -22,7 +22,7 @@ from emencia.django.directory.workgroups import request_workgroups_profiles_pk
 
 
 class ProfileChangeForm(forms.ModelForm):
-    username = forms.RegexField(label=_('Username'), max_length=30, regex=r'^[-\w]+$', required=False,
+    username = forms.RegexField(label=_('Username'), max_length=30, regex=r'^[\w.@+-]+$', required=False,
                                 help_text = _('Required. 30 characters or fewer. Alphanumeric characters only (letters, digits and underscores).'),
                                 error_message = _('This value must contain only letters, numbers and underscores.'),
                                 widget=admin.widgets.AdminTextInputWidget)
