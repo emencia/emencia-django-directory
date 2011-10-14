@@ -21,7 +21,7 @@ setup(name='emencia.django.directory',
       author='Fantomas42',
       author_email='fantomas42@gmail.com',
       url='http://emencia.fr',
-      
+
       license='BSD License',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['emencia', 'emencia.django'],
@@ -29,7 +29,7 @@ setup(name='emencia.django.directory',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'tagging',
+          'django-tagging',
           #'emencia.django.countries',
       ],
       entry_points="""
